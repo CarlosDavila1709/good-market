@@ -1,0 +1,12 @@
+
+rootProject.name = 'goodmarket'
+
+
+include ':shared'
+project(':shared').projectDir = new File('src/shared')
+
+include ':backoffice'
+project(':backoffice').projectDir = new File('src/backoffice')
+
+include ':administration'
+project(':administration').projectDir = new File('src/administration')
