@@ -11,9 +11,9 @@
                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                     Usuarios
                 </a>
-                <a href="/courses"
+                <a href="/grocerys"
                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                    Cursos
+                    Tiendas
                 </a>
                 <a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
                     Vídeos

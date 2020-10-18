@@ -22,7 +22,7 @@ public final class DomainEventSubscribersInformation {
     }
 
     private static HashMap<Class<?>, DomainEventSubscriberInformation> scanDomainEventSubscribers() {
-        Reflections   reflections = new Reflections("chasqui.food");
+        Reflections   reflections = new Reflections("store.market");
         Set<Class<?>> subscribers = reflections.getTypesAnnotatedWith(DomainEventSubscriber.class);
 
         HashMap<Class<?>, DomainEventSubscriberInformation> subscribersInformation = new HashMap<>();

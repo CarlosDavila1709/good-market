@@ -90,12 +90,12 @@ public final class HibernateConfigurationFactory {
     }
 
     private List<String> subdirectoriesFor(String contextName) {
-        String path = "./src/" + contextName + "/main/chasqui/food/" + contextName + "/";
+        String path = "./src/" + contextName + "/main/store/market/" + contextName + "/";
 
         String[] files = new File(path).list((current, name) -> new File(current, name).isDirectory());
 
         if (null == files) {
-            path  = "./main/chasqui/food/" + contextName + "/";
+            path  = "./main/store/market/" + contextName + "/";
             files = new File(path).list((current, name) -> new File(current, name).isDirectory());
         }
 

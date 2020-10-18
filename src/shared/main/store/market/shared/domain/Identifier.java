@@ -29,7 +29,7 @@ public abstract class Identifier implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        store.market.shared.domain.Identifier that = (store.market.shared.domain.Identifier) o;
+        Identifier that = (Identifier) o;
         return value.equals(that.value);
     }
 

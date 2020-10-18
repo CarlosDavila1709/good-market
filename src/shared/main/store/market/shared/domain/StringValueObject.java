@@ -3,7 +3,7 @@ package store.market.shared.domain;
 import java.util.Objects;
 
 public abstract class StringValueObject {
-    private String value;
+    private final String value;
 
     public StringValueObject(String value) {
         this.value = value;
@@ -23,10 +23,10 @@ public abstract class StringValueObject {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof store.market.shared.domain.StringValueObject)) {
+        if (!(o instanceof StringValueObject)) {
             return false;
         }
-        store.market.shared.domain.StringValueObject that = (store.market.shared.domain.StringValueObject) o;
+        StringValueObject that = (StringValueObject) o;
         return Objects.equals(value, that.value);
     }
 

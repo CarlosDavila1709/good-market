@@ -3,7 +3,7 @@ package store.market.shared.domain;
 import java.util.Objects;
 
 public abstract class IntValueObject {
-    private Integer value;
+    private final Integer value;
 
     public IntValueObject(Integer value) {
         this.value = value;
@@ -21,7 +21,7 @@ public abstract class IntValueObject {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        store.market.shared.domain.IntValueObject that = (store.market.shared.domain.IntValueObject) o;
+        IntValueObject that = (IntValueObject) o;
         return value.equals(that.value);
     }
 

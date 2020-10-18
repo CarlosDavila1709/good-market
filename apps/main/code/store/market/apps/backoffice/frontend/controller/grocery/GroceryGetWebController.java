@@ -30,7 +30,7 @@ public final class GroceryGetWebController {
     ) throws QueryHandlerExecutionError {
        
         return new ModelAndView("pages/grocery/grocery", new HashMap<String, Serializable>() {{
-            put("title", "Courses");
+            put("title", "Tiendas");
             put("description", "Courses CodelyTV - Backoffice");
             put("courses_counter", 10);
             put("inputs", inputs);

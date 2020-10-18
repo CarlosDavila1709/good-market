@@ -12,7 +12,7 @@ import store.market.shared.domain.Service;
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 @ComponentScan(
     includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Service.class),
-    value = {"store.market.shared", "store.market.backoffice", "store.market.grocery", "store.market.apps.backoffice.frontend"}
+    value = {"store.market.shared", "store.market.backoffice", "store.market.apps.backoffice.frontend"}
 )
 public class BackofficeFrontendApplication {
 

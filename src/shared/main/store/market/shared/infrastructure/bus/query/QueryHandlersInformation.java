@@ -15,7 +15,7 @@ public final class QueryHandlersInformation {
     HashMap<Class<? extends Query>, Class<? extends QueryHandler>> indexedQueryHandlers;
 
     public QueryHandlersInformation() {
-        Reflections                        reflections = new Reflections("chasqui.food");
+        Reflections                        reflections = new Reflections("store.market");
         Set<Class<? extends QueryHandler>> classes     = reflections.getSubTypesOf(QueryHandler.class);
 
         indexedQueryHandlers = formatHandlers(classes);
