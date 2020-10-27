@@ -24,7 +24,6 @@ public final class GroceryCreator {
 	
 	public void create(GroceryId id, GroceryNameCommercial nameCommercial, GroceryAddress address, GroceryActive active) {
 		
-		
 		Grocery grocery = Grocery.create(id, nameCommercial, address, active);
 		
 		repository.save(grocery);

@@ -11,26 +11,23 @@ import store.market.shared.infrastructure.spring.ApiController;
 import java.util.HashMap;
 
 @RestController
-public final class HealthCheckGetController  extends ApiController{
-	
-    public HealthCheckGetController(
-            QueryBus queryBus,
-            CommandBus commandBus
-        ) {
-            super(queryBus, commandBus);
-        }
+public final class HealthCheckGetController extends ApiController {
 
-    @GetMapping("/health-check")
-    public HashMap<String, String> index() {
-        HashMap<String, String> status = new HashMap<>();
-        status.put("application", "backoffice_backend");
-        status.put("status", "ok");
+	public HealthCheckGetController(QueryBus queryBus, CommandBus commandBus) {
+		super(queryBus, commandBus);
+	}
 
-        return status;
-    }
+	@GetMapping("/health-check")
+	public HashMap<String, String> index() {
+		HashMap<String, String> status = new HashMap<>();
+		status.put("application", "backoffice_backend");
+		status.put("status", "ok");
 
-    @Override
-    public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
-    }
+		return status;
+	}
+
+	@Override
+	public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
+		return null;
+	}
 }

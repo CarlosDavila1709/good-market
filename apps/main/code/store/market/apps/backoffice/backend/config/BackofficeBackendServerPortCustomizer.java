@@ -7,21 +7,22 @@ import store.market.shared.infrastructure.config.Parameter;
 import store.market.shared.infrastructure.config.ParameterNotExist;
 
 @Component
-public final class BackofficeBackendServerPortCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory>{
+public final class BackofficeBackendServerPortCustomizer
+		implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
 
-	 private final Parameter param;
+	private final Parameter param;
 
-	    public BackofficeBackendServerPortCustomizer(Parameter param) {
-	        this.param = param;
-	    }
+	public BackofficeBackendServerPortCustomizer(Parameter param) {
+		this.param = param;
+	}
 
-	    @Override
-	    public void customize(ConfigurableWebServerFactory factory) {
-	        try {
-	            factory.setPort(param.getInt("BACKOFFICE_BACKEND_SERVER_PORT"));
-	        } catch (ParameterNotExist parameterNotExist) {
-	            parameterNotExist.printStackTrace();
-	        }
-	    }
-	    
+	@Override
+	public void customize(ConfigurableWebServerFactory factory) {
+		try {
+			factory.setPort(param.getInt("BACKOFFICE_BACKEND_SERVER_PORT"));
+		} catch (ParameterNotExist parameterNotExist) {
+			parameterNotExist.printStackTrace();
+		}
+	}
+
 }

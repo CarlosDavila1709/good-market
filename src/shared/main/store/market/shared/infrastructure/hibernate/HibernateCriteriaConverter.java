@@ -5,6 +5,7 @@ import store.market.shared.domain.criteria.Filter;
 import store.market.shared.domain.criteria.FilterOperator;
 
 import javax.persistence.criteria.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -58,11 +59,17 @@ public final class HibernateCriteriaConverter<T> {
 
         return transformer.apply(filter, root);
     }
-
+    
+       
     private Predicate equalsPredicateTransformer(Filter filter, Root<T> root) {
-    	Path<T> path = root.get(filter.field().value());
     	
-        return builder.equal(root.get(filter.field().value()).get("value"), filter.value().value());
+    	String simpleName = root.get(filter.field().value()).getJavaType().getSimpleName();
+    	
+    	if(simpleName.equals("String")) {
+    		return builder.equal(root.get(filter.field().value()), filter.value().value());
+    	}else {
+    		return builder.equal(root.get(filter.field().value()).get("value"), filter.value().value());
+    	}
     }
 
     private Predicate notEqualsPredicateTransformer(Filter filter, Root<T> root) {
@@ -84,4 +91,5 @@ public final class HibernateCriteriaConverter<T> {
     private Predicate notContainsPredicateTransformer(Filter filter, Root<T> root) {
         return builder.notLike(root.get(filter.field().value()), String.format("%%%s%%", filter.value().value()));
     }
+
 }

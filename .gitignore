@@ -1,6 +1,7 @@
 # Gradle
 .gradle
 build/
+bin/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -9,3 +10,4 @@ gradle-app.setting
 !/var/log/.gitkeep
 
 *.class
+*.DS_Store

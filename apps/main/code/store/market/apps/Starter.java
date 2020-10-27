@@ -1,16 +1,17 @@
 package store.market.apps;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import store.market.apps.administration.backend.AdministrationBackendApplication;
+import store.market.apps.administration.frontend.AdministrationFrontendApplication;
 import store.market.apps.backoffice.backend.BackofficeBackendApplication;
 import store.market.apps.backoffice.frontend.BackofficeFrontendApplication;
 import store.market.shared.infrastructure.cli.ConsoleCommand;
 
 import java.util.Arrays;
 import java.util.HashMap;
-
 
 public class Starter {
 
@@ -76,6 +77,9 @@ public class Starter {
         applications.put("backoffice_backend", BackofficeBackendApplication.class);
         applications.put("backoffice_frontend", BackofficeFrontendApplication.class);
 
+        applications.put("administration_backend", AdministrationBackendApplication.class);
+        applications.put("administration_frontend", AdministrationFrontendApplication.class);
+        
         return applications;
     }
 
@@ -85,6 +89,8 @@ public class Starter {
         commands.put("backoffice_backend", BackofficeBackendApplication.commands());
         commands.put("backoffice_frontend", BackofficeFrontendApplication.commands());
 
+        commands.put("administration_backend", AdministrationBackendApplication.commands());
+        commands.put("administration_frontend", AdministrationFrontendApplication.commands());
         return commands;
     }
 

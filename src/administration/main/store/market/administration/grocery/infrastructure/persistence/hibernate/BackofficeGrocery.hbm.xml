@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="store.market.administration.grocery.domain.BackofficeGrocery" table="grocerys">
+		
+		<id name="id" column="id" access="field" length="36" />
+        <property name="nameCommercial" column="name_commercial" type="string" access="field" />
+        <property name="address" column="address" type="string" access="field" />
+        <property name="active" column="active" type="string" access="field" />
+    </class>
+</hibernate-mapping>

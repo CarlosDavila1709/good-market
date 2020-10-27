@@ -1,0 +1,15 @@
+./gradlew :run --args='backoffice_backend'
+./gradlew :run --args='backoffice_frontend'
+./gradlew :run --args='administration_backend'
+
+backoffice_backend
+server
+
+backoffice_frontend
+server
+
+administration_backend
+server
+
+administration_frontend
+server
