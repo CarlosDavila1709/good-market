@@ -3,7 +3,7 @@ package store.market.administration.product.domain;
 import store.market.shared.domain.Identifier;
 import store.market.shared.domain.StringValueObject;
 
-public final class ProductCategorieId extends StringValueObject{
+public final class ProductCategorieId extends Identifier{
 
 	public ProductCategorieId(String value) {
 		
@@ -11,6 +11,6 @@ public final class ProductCategorieId extends StringValueObject{
 	}
 	
 	public ProductCategorieId() {
-		super(null);
+		//super(null);
 	}
 }

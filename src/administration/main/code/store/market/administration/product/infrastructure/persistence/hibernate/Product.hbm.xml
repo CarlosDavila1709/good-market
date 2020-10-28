@@ -18,7 +18,7 @@
             <property name="value" column="name" type="string" access="field" />
         </component>
         <component name="price" class="store.market.administration.product.domain.ProductPrice" access="field">
-            <property name="value" column="name" type="double" access="field" />
+            <property name="value" column="price" type="double" access="field" />
         </component>
     </class>
 </hibernate-mapping>

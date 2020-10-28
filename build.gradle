@@ -79,7 +79,7 @@ subprojects {
 
     sourceSets {
         main {
-            java { srcDirs = ['main'] }
+            java { srcDirs = ['main/code'] }
             resources { srcDirs = ['main/resources'] }
         }
 
