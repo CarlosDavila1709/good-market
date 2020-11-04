@@ -30,7 +30,8 @@ public final class CategoriesGetController extends ApiController{
 		super(queryBus, commandBus);
 	}
 	
-    @GetMapping("/categories")
+    @SuppressWarnings("serial")
+	@GetMapping("/categories")
     public List<HashMap<String, String>> index() throws QueryHandlerExecutionError {
 
         CategoriesResponse categories = ask(

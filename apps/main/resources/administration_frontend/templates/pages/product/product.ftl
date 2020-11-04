@@ -76,9 +76,10 @@
 	  Grabar
 	</button>
 	</form>
+	<#include "partials/list_products_catalog.ftl">
 	<script>
 	function updateUidCategorie(select){
-
+		 console.log("select: "+select);
 		  var idCategoria = select;
 		  console.log(idCategoria);
 		  const gridUidCategorie = document.getElementById("categorieID");
@@ -108,8 +109,8 @@
                     categorieOption.innerHTML = categorie.name;
                     selectBody.appendChild(categorieOption);
                 })
+                updateUidCategorie(document.getElementById("categories-list").value);
             });
-        updateUidCategorie(selectBody.value);
     }
     function addMeasuresList(url) {
         console.log(url);
@@ -128,11 +129,13 @@
                     categorieOption.innerHTML = categorie.name;
                     selectBody.appendChild(categorieOption);
                 })
+                updateUidMeasure(document.getElementById("unidades-list").value);
             });
     }
     </script>
     <script>
     addCategoriesList("http://localhost:8093/categories");
     addMeasuresList("http://localhost:8093/unitmeasures");
+    
 	</script>
 </#macro>

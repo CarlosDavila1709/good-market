@@ -1,12 +1,14 @@
 package store.market.administration.unit_measure.infrastructure.persistence;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
 import store.market.administration.unit_measure.domain.UnitMeasure;
+import store.market.administration.unit_measure.domain.UnitMeasureId;
 import store.market.administration.unit_measure.domain.UnitMeasureRepository;
 import store.market.shared.domain.Service;
 import store.market.shared.domain.criteria.Criteria;
@@ -36,6 +38,12 @@ public final class PgSqlUnitMeasureRepository extends HibernateRepository<UnitMe
 	@Override
 	public List<UnitMeasure> matching(Criteria criteria) {
 		return byCriteria(criteria);
+	}
+
+	@Override
+	public Optional<UnitMeasure> search(UnitMeasureId id) {
+		
+		return byId(id);
 	}
 
 }

@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
+
     <title>${title}</title>
     <title>${description}</title>
 </head>
@@ -47,5 +48,8 @@
   th:not(:last-child) {
     border-bottom: 2px solid rgba(0, 0, 0, .1);
   }
+  
+  
+
 </style>
 </html>

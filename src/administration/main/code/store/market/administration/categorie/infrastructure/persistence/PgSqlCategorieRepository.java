@@ -1,12 +1,14 @@
 package store.market.administration.categorie.infrastructure.persistence;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
 import store.market.administration.categorie.domain.Categorie;
+import store.market.administration.categorie.domain.CategorieId;
 import store.market.administration.categorie.domain.CategorieRepository;
 import store.market.shared.domain.Service;
 import store.market.shared.domain.criteria.Criteria;
@@ -34,4 +36,10 @@ public final class PgSqlCategorieRepository extends HibernateRepository<Categori
     public List<Categorie> matching(Criteria criteria) {
         return byCriteria(criteria);
     }
+
+	@Override
+	public Optional<Categorie> search(CategorieId id) {
+		
+		return byId(id);
+	}
 }

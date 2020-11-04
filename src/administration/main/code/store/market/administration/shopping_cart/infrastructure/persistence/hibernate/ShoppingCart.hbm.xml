@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="store.market.administration.shopping_cart.domain.ShoppingCart" table="shopping_cart">
+       <composite-id name="id" class="store.market.administration.shopping_cart.domain.ShoppingCartId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+        <component name="sessionId" class="store.market.administration.shopping_cart.domain.ShoppingCartSessionId" access="field">
+            <property name="value" column="session_id" type="string" access="field" />
+        </component>
+        <component name="amountTotal" class="store.market.administration.shopping_cart.domain.ShoppingCartAmountTotal" access="field">
+            <property name="value" column="amount_total" type="double" access="field" />
+        </component>
+        <component name="totalItems" class="store.market.administration.shopping_cart.domain.ShoppingCartCounterItems" access="field">
+            <property name="value" column="total_items" type="integer" access="field" />
+        </component>
+    </class>
+</hibernate-mapping>

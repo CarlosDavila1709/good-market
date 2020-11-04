@@ -29,7 +29,7 @@ public final class GroceryCreator {
 		repository.save(grocery);
 		
 		eventBus.publish(grocery.pullDomainEvents());
-		
+
 	}
 	
 }

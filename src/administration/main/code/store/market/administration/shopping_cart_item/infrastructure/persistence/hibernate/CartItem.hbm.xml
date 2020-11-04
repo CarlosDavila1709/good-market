@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="store.market.administration.shopping_cart_item.domain.CartItem" table="cart_items">
+        <composite-id name="id" class="store.market.administration.shopping_cart_item.domain.CartItemId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+        <component name="sessionId" class="store.market.administration.shopping_cart_item.domain.ShoppingCartSessionId" access="field">
+            <property name="value" column="session_id" type="string" access="field" />
+        </component>
+        <component name="productId" class="store.market.administration.shopping_cart_item.domain.CartItemProductId" access="field">
+            <property name="value" column="product_id" type="string" access="field" />
+        </component>
+        <component name="productName" class="store.market.administration.shopping_cart_item.domain.CartItemProductName" access="field">
+            <property name="value" column="product_name" type="string" access="field" />
+        </component>
+        <component name="productPrice" class="store.market.administration.shopping_cart_item.domain.CartItemProductPrice" access="field">
+            <property name="value" column="product_price" type="double" access="field" />
+        </component>
+        <component name="amountTotal" class="store.market.administration.shopping_cart_item.domain.CartItemAmountTotal" access="field">
+            <property name="value" column="amount_total" type="double" access="field" />
+        </component>
+        <component name="quantity" class="store.market.administration.shopping_cart_item.domain.CartItemQuantity" access="field">
+            <property name="value" column="quantity" type="integer" access="field" />
+        </component>
+    </class>
+</hibernate-mapping>
