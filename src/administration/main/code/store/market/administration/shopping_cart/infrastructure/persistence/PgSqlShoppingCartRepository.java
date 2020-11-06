@@ -1,5 +1,6 @@
 package store.market.administration.shopping_cart.infrastructure.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,9 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import store.market.administration.shopping_cart.domain.ShoppingCart;
 import store.market.administration.shopping_cart.domain.ShoppingCartId;
 import store.market.administration.shopping_cart.domain.ShoppingCartRepository;
-
+import store.market.administration.shopping_cart.domain.ShoppingCartSessionId;
 import store.market.shared.domain.Service;
 import store.market.shared.domain.criteria.Criteria;
+import store.market.shared.domain.criteria.Filter;
+import store.market.shared.domain.criteria.Filters;
+import store.market.shared.domain.criteria.Order;
 import store.market.shared.infrastructure.hibernate.HibernateRepository;
 
 @Service
@@ -49,5 +53,28 @@ public class PgSqlShoppingCartRepository extends HibernateRepository<ShoppingCar
 		return byId(id);
 	}
 
+	@Override
+	public Optional<ShoppingCart> search(ShoppingCartSessionId id) {
+    	
+		Filters filters = filtersSessionProduct(id);
+        Criteria criteria = new Criteria(
+        		filters,
+                Order.none(),
+                Optional.empty(),
+                Optional.empty()
+            );
+		
+        List<ShoppingCart> carts = byCriteria(criteria);
+        return 0 ==  carts.size() ? Optional.empty() : Optional.ofNullable(carts.get(0));
+	}
 	
+    private Filters filtersSessionProduct(ShoppingCartSessionId sessionId) {
+		
+    	Filter filterSession = Filter.create("sessionId", "=", sessionId.value());
+		
+		List<Filter> filtersList = new ArrayList<Filter>();
+		filtersList.add(filterSession);
+		
+		return new Filters(filtersList);
+    }
 }

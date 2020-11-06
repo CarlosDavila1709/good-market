@@ -13,6 +13,11 @@ public class CartItemQuantity extends IntValueObject{
 		super(null);
 		
 	}
+	public static CartItemQuantity initialize() {
+		
+		return new CartItemQuantity(0);
+		
+	}
 	
     public CartItemQuantity increment(CartItemQuantity cartItemQuantity) {
         return new CartItemQuantity(value() + cartItemQuantity.value());

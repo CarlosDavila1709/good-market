@@ -3,7 +3,7 @@ package store.market.administration.shopping_cart_item.domain;
 import java.util.Objects;
 
 import store.market.shared.domain.AggregateRoot;
-import store.market.shared.domain.cart_item.CartItemCreatedDomainEvent;
+
 
 public final class CartItem extends AggregateRoot {
 	
@@ -17,9 +17,9 @@ public final class CartItem extends AggregateRoot {
 	
 	private final CartItemProductName productName;
 	
-	private final CartItemAmountTotal amountTotal;
+	private CartItemAmountTotal amountTotal;
 	
-	private final CartItemQuantity quantity;
+	private CartItemQuantity quantity;
 
 	public CartItem(
 			CartItemId id,
@@ -49,26 +49,30 @@ public final class CartItem extends AggregateRoot {
 		this.quantity = null;
 	}
 	
-	public static CartItem create(
+	public static CartItem initialize(
 			CartItemId id,
 			ShoppingCartSessionId shoppingCartSession,
 			CartItemProductId productId,
 			CartItemProductPrice productPrice,
-			CartItemProductName productName,
-			CartItemQuantity quantity) {
+			CartItemProductName productName) {
 		
-		CartItem cartItem = new  CartItem(id,shoppingCartSession,productId,productPrice,productName,quantity);
-		
-		cartItem.record(new CartItemCreatedDomainEvent(productId.value(),productName.value()));
-		
+		CartItem cartItem = new  CartItem(id,shoppingCartSession,productId,productPrice,productName,CartItemQuantity.initialize());
+
 		return cartItem;
 		
 	}
     public void increment(CartItemQuantity quantity) {
     	
-    	quantity = quantity.increment(quantity);
+    	this.quantity = this.quantity.increment(quantity);
        
-    }
+    }	
+    public void addAmount(CartItemProductPrice productPrice,CartItemQuantity quantity) {
+		
+		Double amountTotalByQuantity = productPrice.value() * quantity.value();
+		
+		this.amountTotal = this.amountTotal.increment(amountTotalByQuantity);
+
+	}
 	public CartItemId id() {
 		return id;
 	}
@@ -111,4 +115,5 @@ public final class CartItem extends AggregateRoot {
     public int hashCode() {
         return Objects.hash(id,sessionId,productId, productPrice,productName,amountTotal,quantity);
     }
+
 }

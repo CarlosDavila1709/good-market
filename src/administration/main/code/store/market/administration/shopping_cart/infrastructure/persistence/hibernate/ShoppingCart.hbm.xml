@@ -17,5 +17,10 @@
         <component name="totalItems" class="store.market.administration.shopping_cart.domain.ShoppingCartCounterItems" access="field">
             <property name="value" column="total_items" type="integer" access="field" />
         </component>
+        <property name="existingProducts" column="existing_products" access="field">
+            <type name="json_string">
+                <param name="list_of">store.market.administration.product.domain.ProductId</param>
+            </type>
+        </property>
     </class>
 </hibernate-mapping>

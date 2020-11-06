@@ -40,6 +40,7 @@ CREATE TABLE  IF NOT EXISTS shopping_cart (
     session_id CHAR(36) NOT NULL,
     amount_total DECIMAL(13, 2) NOT NULL,
     total_items INT NOT NULL,
+    existing_products VARCHAR(10000000),
     PRIMARY KEY (id)
 ) ;
 CREATE TABLE  IF NOT EXISTS cart_items (

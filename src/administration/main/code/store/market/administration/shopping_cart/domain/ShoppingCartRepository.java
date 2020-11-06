@@ -15,5 +15,5 @@ public interface ShoppingCartRepository {
     
     Optional<ShoppingCart> search(ShoppingCartId id);
     
-    
+    Optional<ShoppingCart> search(ShoppingCartSessionId id);
 }

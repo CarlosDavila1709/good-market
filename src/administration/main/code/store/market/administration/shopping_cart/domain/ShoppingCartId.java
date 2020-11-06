@@ -9,6 +9,6 @@ public final class ShoppingCartId extends Identifier {
 	}
 	
 	public ShoppingCartId() {
-		super(null);
+		
 	}
 }

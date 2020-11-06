@@ -12,4 +12,11 @@ public final class ShoppingCartCounterItems extends IntValueObject{
 		
 		super(null);
 	}
+	
+    public static ShoppingCartCounterItems initialize() {
+        return new ShoppingCartCounterItems(0);
+    }
+    public ShoppingCartCounterItems increment(int value) {
+        return new ShoppingCartCounterItems(value() + value);
+    }
 }

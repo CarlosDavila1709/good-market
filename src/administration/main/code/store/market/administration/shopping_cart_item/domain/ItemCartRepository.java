@@ -15,4 +15,5 @@ public interface ItemCartRepository {
 	
 	List<CartItem> searchAll(String shoppingId) ;
 	
+	Optional<CartItem> search(ShoppingCartSessionId sessionId, CartItemProductId productId);
 }

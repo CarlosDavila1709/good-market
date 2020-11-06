@@ -13,4 +13,9 @@ public final class CartItemAmountTotal extends DoubleValueObject{
 		super(null);
 		// TODO Auto-generated constructor stub
 	}
+    public CartItemAmountTotal increment(Double value) {
+        
+    	return new CartItemAmountTotal(this.value() + value);
+    	
+    }
 }

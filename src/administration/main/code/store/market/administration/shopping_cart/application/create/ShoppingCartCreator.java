@@ -21,10 +21,10 @@ public final class ShoppingCartCreator {
 
     public void create(ShoppingCartId id,ShoppingCartSessionId sessionId, ShoppingCartAmountTotal amountTotal) {
         
-    	ShoppingCart shoppingCart  = ShoppingCart.create(id, sessionId, amountTotal);
+    	//ShoppingCart shoppingCart  = ShoppingCart.create(id, sessionId, amountTotal);
 
-        repository.save(shoppingCart);
+        //repository.save(shoppingCart);
        
-        eventBus.publish(shoppingCart.pullDomainEvents());
+        //eventBus.publish(shoppingCart.pullDomainEvents());
     }
 }

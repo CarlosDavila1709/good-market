@@ -13,6 +13,11 @@ public final class ShoppingCartAmountTotal extends DoubleValueObject{
 		
 	}
 	
+    public static ShoppingCartAmountTotal initialize() {
+        
+    	return new ShoppingCartAmountTotal(0.00);
+    }
+    
     public ShoppingCartAmountTotal increment(Double value) {
         
     	return new ShoppingCartAmountTotal(this.value() + value);

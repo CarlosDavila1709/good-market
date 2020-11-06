@@ -11,7 +11,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import store.market.administration.shopping_cart_item.application.add_product.AddItemCommand;
+import store.market.administration.shopping_cart.application.add_product_to_card.AddProductShoppingCartCommand;
+
 import store.market.shared.domain.bus.command.CommandBus;
 import store.market.shared.domain.bus.command.CommandHandlerExecutionError;
 import store.market.shared.infrastructure.validation.ValidationResponse;
@@ -58,13 +59,12 @@ public final class ShoppingCartPostWebController {
    }
    private RedirectView addProductCart(HashMap<String, Serializable> request) throws CommandHandlerExecutionError {
 
-        bus.dispatch(new AddItemCommand(
-        	getSessionId() ,
-            request.get("productId").toString(),
-            Double.valueOf(request.get("price").toString()),
-            Integer.valueOf(request.get("quantity").toString())
-        ));
-
+        bus.dispatch(new AddProductShoppingCartCommand(
+            	getSessionId() ,
+                request.get("productId").toString(),
+                Integer.valueOf(request.get("quantity").toString())
+            ));
+        
         return new RedirectView("/products-list");
     }
    
