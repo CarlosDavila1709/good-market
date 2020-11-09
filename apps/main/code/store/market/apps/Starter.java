@@ -8,6 +8,7 @@ import store.market.apps.administration.backend.AdministrationBackendApplication
 import store.market.apps.administration.frontend.AdministrationFrontendApplication;
 import store.market.apps.backoffice.backend.BackofficeBackendApplication;
 import store.market.apps.backoffice.frontend.BackofficeFrontendApplication;
+import store.market.apps.webstore.frontend.WebStoreFrontendApplication;
 import store.market.shared.infrastructure.cli.ConsoleCommand;
 
 import java.util.Arrays;
@@ -74,6 +75,8 @@ public class Starter {
     private static HashMap<String, Class<?>> applications() {
         HashMap<String, Class<?>> applications = new HashMap<>();
 
+        applications.put("webstore_frontend", WebStoreFrontendApplication.class);
+        
         applications.put("backoffice_backend", BackofficeBackendApplication.class);
         applications.put("backoffice_frontend", BackofficeFrontendApplication.class);
 
@@ -86,6 +89,8 @@ public class Starter {
     private static HashMap<String, HashMap<String, Class<?>>> commands() {
         HashMap<String, HashMap<String, Class<?>>> commands = new HashMap<>();
 
+        commands.put("webstore_frontend", WebStoreFrontendApplication.commands());
+        
         commands.put("backoffice_backend", BackofficeBackendApplication.commands());
         commands.put("backoffice_frontend", BackofficeFrontendApplication.commands());
 

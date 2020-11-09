@@ -21,23 +21,12 @@
                 </a>
                 <a href="#" 
                 	class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 hover:text-white mr-4">
-                    Pedidos
+                    Ordenes
                 </a>
-               <a href="/products-list" 
-               		class="block mt-4 sm:inline-block sm:mt-0 text-teal-200 hover:text-white mr-4">
-                    Catalogo Bodega
-               </a>
             </div>
             <div>
-                <!--  <a href="/" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 sm:mt-0">
-	                <img src="images/cart.jpeg" alt="" width="50px">
-	            </a>-->
-                <label class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 sm:mt-0">
-	                items: 67676
-	            </label>
-	            <label class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 sm:mt-0">
-	                Total: 67676
-	            </label>
+                <a href="#"
+                   class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Entrar</a>
             </div>
         </div>
     </nav>

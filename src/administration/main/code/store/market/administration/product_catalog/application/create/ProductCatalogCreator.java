@@ -34,6 +34,14 @@ public final class ProductCatalogCreator {
 		
 		UnitMeasureResponse unitMeasure = queryBus.ask(new FindUnitMeasureQuery(product.unitMeasureId()));
 		
-		this.repository.save(new ProductCatalog(new ProductCatalogId(product.id()), product.name(), categorie.id(), categorie.name(), unitMeasure.id(),unitMeasure.name(), product.price()));
+		this.repository.save(new ProductCatalog(
+				new ProductCatalogId(product.id()),
+				product.name(), 
+				categorie.id(), 
+				categorie.name(), 
+				unitMeasure.id(),
+				product.groceryId(),
+				unitMeasure.name(), 
+				product.price()));
 	}
 }

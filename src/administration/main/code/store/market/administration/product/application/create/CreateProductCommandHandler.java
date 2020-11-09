@@ -1,5 +1,6 @@
 package store.market.administration.product.application.create;
 
+import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product.domain.ProductCategorieId;
 import store.market.administration.product.domain.ProductId;
 import store.market.administration.product.domain.ProductName;
@@ -24,7 +25,8 @@ public class CreateProductCommandHandler implements CommandHandler<CreateProduct
         ProductUnitMeasureId unitMeasureId  = new ProductUnitMeasureId(command.unitMeasureId());
         ProductName 		 name  			= new ProductName(command.name());
         ProductPrice 		 price			= new ProductPrice(command.price());
+        BackofficeGroceryId  groceryId      = new BackofficeGroceryId(command.groceryId());
         
-        creator.create(id,categorieId,unitMeasureId,name,price);
+        creator.create(id,categorieId,unitMeasureId,groceryId,name,price);
     }
 }

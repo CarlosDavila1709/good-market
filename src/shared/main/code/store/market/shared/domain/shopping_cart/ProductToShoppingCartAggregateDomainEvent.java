@@ -10,6 +10,7 @@ public final class ProductToShoppingCartAggregateDomainEvent extends DomainEvent
 	
 	private final String productId;
 	private final String sessionId;
+	private final String groceryId;
 	private final Integer quantity;
 	
 	public ProductToShoppingCartAggregateDomainEvent() {
@@ -17,27 +18,31 @@ public final class ProductToShoppingCartAggregateDomainEvent extends DomainEvent
 		super(null);
 		this.productId = null;
 		this.sessionId = null;
+		this.groceryId = null;
 		this.quantity = 0;
 
 	}
-	public ProductToShoppingCartAggregateDomainEvent(String aggregateId,String sessionId,String productId,Integer quantity) 
+	public ProductToShoppingCartAggregateDomainEvent(String aggregateId,String sessionId,String productId,Integer quantity,String groceryId) 
 	{
 		super(aggregateId);
 		this.sessionId = sessionId;
 		this.productId = productId;
 		this.quantity = quantity;
+		this.groceryId = groceryId;
 	}
 	public ProductToShoppingCartAggregateDomainEvent(String aggregateId,
 			String eventId,
 			String occurredOn,
 		    String sessionId,
 			String productId,
-			int quantity) {
+			int quantity,
+			String groceryId) {
 		
 		super(aggregateId,eventId,occurredOn);
 		this.sessionId = sessionId;
 		this.productId = productId;
-		this.quantity = quantity;
+		this.quantity  = quantity;
+		this.groceryId = groceryId;
 		
 	}
 	
@@ -53,6 +58,7 @@ public final class ProductToShoppingCartAggregateDomainEvent extends DomainEvent
         	put("sessionId", sessionId);
             put("productId", productId);
             put("quantity", quantity);
+            put("groceryId", groceryId);
         }};
     }
     
@@ -67,9 +73,10 @@ public final class ProductToShoppingCartAggregateDomainEvent extends DomainEvent
             aggregateId,
             eventId,
             occurredOn,
-            (String) body.get("sessionId"),
-            (String) body.get("productId"),
-            (Integer) body.get("quantity")
+            (String)  body.get("sessionId"),
+            (String)  body.get("productId"),
+            (Integer) body.get("quantity"),
+            (String)  body.get("groceryId")
         );
     }
     
@@ -81,11 +88,12 @@ public final class ProductToShoppingCartAggregateDomainEvent extends DomainEvent
         return productId;
     }
 
-    
     public Integer quantity() {
         return quantity;
     }
-    
+    public String groceryId() {
+    	return groceryId;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -96,12 +104,13 @@ public final class ProductToShoppingCartAggregateDomainEvent extends DomainEvent
         }
         ProductToShoppingCartAggregateDomainEvent that = (ProductToShoppingCartAggregateDomainEvent) o;
         return productId.equals(that.productId) &&
-        		sessionId.equals(that.sessionId);
+        		sessionId.equals(that.sessionId) &&
+        		groceryId.equals(that.groceryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sessionId,productId,quantity);
+        return Objects.hash(sessionId,productId,quantity,groceryId);
     }
 
 }

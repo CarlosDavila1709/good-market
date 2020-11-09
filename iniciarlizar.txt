@@ -1,15 +1,26 @@
 ./gradlew :run --args='backoffice_backend'
 ./gradlew :run --args='backoffice_frontend'
 ./gradlew :run --args='administration_backend'
+./gradlew :run --args='administration_frontend'
+./gradlew :run --args='webstore_backend'
+./gradlew :run --args='webstore_frontend'
 
+8091
 backoffice_backend
 server
 
+8090
 backoffice_frontend
 server
 
+8093
 administration_backend
 server
 
+8092
 administration_frontend
+server
+
+8094
+webstore_frontend
 server

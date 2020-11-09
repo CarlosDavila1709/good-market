@@ -62,6 +62,7 @@ public final class ProductPostWebController {
             request.get("id").toString(),
             request.get("categorieID").toString(),
             request.get("measureID").toString(),
+            "78bd479b-5a06-48b6-8b9a-f8b5d4d889f8",
             request.get("name").toString(),
             Double.valueOf(request.get("price").toString())
         ));

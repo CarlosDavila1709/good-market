@@ -59,6 +59,7 @@ public class UnitMeasurePostWebController {
         
     	bus.dispatch(new CreateUnitMeasureCommand(
             request.get("id").toString(),
+            "78bd479b-5a06-48b6-8b9a-f8b5d4d889f8",
             request.get("name").toString(),
             request.get("prefix").toString()
         ));

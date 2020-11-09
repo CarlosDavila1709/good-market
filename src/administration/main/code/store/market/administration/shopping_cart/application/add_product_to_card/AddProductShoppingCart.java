@@ -1,5 +1,6 @@
 package store.market.administration.shopping_cart.application.add_product_to_card;
 
+import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product.application.ProductResponse;
 import store.market.administration.product.application.find.FindProductQuery;
 import store.market.administration.product.domain.ProductId;
@@ -30,14 +31,15 @@ public final class AddProductShoppingCart {
 		this.eventBus = eventBus;
 	}
 
-	public void add(ShoppingCartSessionId sessionId, ProductId productId, ShoppingCartQuantity quantity) {
+	public void add(ShoppingCartSessionId sessionId, BackofficeGroceryId groceryId,ProductId productId, ShoppingCartQuantity quantity) {
 
 		ProductResponse product = queryBus.ask(new FindProductQuery(productId.value()));
 		ShoppingCart cart = repository.search(sessionId)
 				.orElseGet(
 						() -> ShoppingCart.initialize(
 						new ShoppingCartId(uuidGenerator.generate()),
-						new ShoppingCartSessionId(sessionId.value())
+						new ShoppingCartSessionId(sessionId.value()),
+						groceryId
 						));
 		
 		cart.addProduct(productId,quantity);

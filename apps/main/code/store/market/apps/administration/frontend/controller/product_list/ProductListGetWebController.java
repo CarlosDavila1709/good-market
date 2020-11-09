@@ -28,6 +28,7 @@ public final class ProductListGetWebController {
             put("inputs", inputs);
             put("errors", errors);
             put("generated_uuid", UUID.randomUUID().toString());
+            
         }});
     }
 }

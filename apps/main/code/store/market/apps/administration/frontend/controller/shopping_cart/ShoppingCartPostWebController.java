@@ -4,6 +4,8 @@ import org.springframework.http.MediaType;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,32 +37,27 @@ public final class ShoppingCartPostWebController {
     }
     
     @PostMapping(value = "/add-cart", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public RedirectView index(
+    public RedirectView index(HttpSession session,
         @RequestParam HashMap<String, Serializable> request,
         RedirectAttributes attributes
     ) throws Exception {
-        ValidationResponse validationResponse = Validator.validate(request, rules);
+        
+    	String sessionId = (String) session.getAttribute("session-id");
+    	System.out.println("session: "+sessionId);
+    	
+    	ValidationResponse validationResponse = Validator.validate(request, rules);
 
         return validationResponse.hasErrors()
             ? redirectWithErrors(validationResponse, request, attributes)
-            : addProductCart(request);
+            : addProductCart(request,sessionId);
     }
-    
-    @SuppressWarnings("unused")
-	private RedirectView redirectWithErrors(
-            ValidationResponse validationResponse,
-            HashMap<String, Serializable> request,
-            RedirectAttributes attributes
-        ) {
-            attributes.addFlashAttribute("errors", validationResponse.errors());
-            attributes.addFlashAttribute("inputs", request);
 
-            return new RedirectView("/products-list");
-   }
-   private RedirectView addProductCart(HashMap<String, Serializable> request) throws CommandHandlerExecutionError {
+   private RedirectView addProductCart(HashMap<String, Serializable> request,String sessionId) throws CommandHandlerExecutionError {
 
+	  
         bus.dispatch(new AddProductShoppingCartCommand(
-            	getSessionId() ,
+        		sessionId ,
+            	"78bd479b-5a06-48b6-8b9a-f8b5d4d889f8",
                 request.get("productId").toString(),
                 Integer.valueOf(request.get("quantity").toString())
             ));
@@ -68,6 +65,17 @@ public final class ShoppingCartPostWebController {
         return new RedirectView("/products-list");
     }
    
+   @SuppressWarnings("unused")
+	private RedirectView redirectWithErrors(
+           ValidationResponse validationResponse,
+           HashMap<String, Serializable> request,
+           RedirectAttributes attributes
+       ) {
+           attributes.addFlashAttribute("errors", validationResponse.errors());
+           attributes.addFlashAttribute("inputs", request);
+
+           return new RedirectView("/products-list");
+  }
    private String getSessionId() {  
 	 
 	   System.out.println("session id: " + RequestContextHolder.currentRequestAttributes().getSessionId());

@@ -2,6 +2,7 @@ package store.market.administration.product.domain;
 
 import java.util.Objects;
 
+import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.shared.domain.AggregateRoot;
 import store.market.shared.domain.product.ProductCreatedDomainEvent;
 
@@ -13,6 +14,8 @@ public final class Product extends AggregateRoot{
 	
 	private final ProductUnitMeasureId unitMeasureId;
 	
+	private final BackofficeGroceryId groceryId;
+	
 	private final ProductName name;
 	
 	private final ProductPrice price;
@@ -20,12 +23,14 @@ public final class Product extends AggregateRoot{
 	public Product(ProductId id, 
 			ProductCategorieId categorieId, 
 			ProductUnitMeasureId unitMeasureId, 
+			BackofficeGroceryId groceryId,
 			ProductName name,
 			ProductPrice price) {
 		
 		this.id = id;
 		this.categorieId = categorieId;
 		this.unitMeasureId = unitMeasureId;
+		this.groceryId = groceryId;
 		this.name = name;
 		this.price = price;
 	}
@@ -34,12 +39,13 @@ public final class Product extends AggregateRoot{
 		this.id = null;
 		this.categorieId = null;
 		this.unitMeasureId = null;
+		this.groceryId = null;
 		this.name = null;
 		this.price = null;
 	}
-	public static Product create(ProductId id, ProductCategorieId categorieId, ProductUnitMeasureId unitMeasureId, ProductName name, ProductPrice price) {
+	public static Product create(ProductId id, ProductCategorieId categorieId, ProductUnitMeasureId unitMeasureId,BackofficeGroceryId groceryId, ProductName name, ProductPrice price) {
 		
-		Product product = new Product(id, categorieId, unitMeasureId, name, price);
+		Product product = new Product(id, categorieId, unitMeasureId, groceryId, name, price);
 		
 		product.record(new ProductCreatedDomainEvent(id.value(), categorieId.value(), unitMeasureId.value(), name.value(), price.value()));
 		
@@ -63,6 +69,10 @@ public final class Product extends AggregateRoot{
     public ProductPrice price() {
         return price;
     }
+    public BackofficeGroceryId groceryId() {
+        return groceryId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,6 +88,6 @@ public final class Product extends AggregateRoot{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, categorieId,unitMeasureId,name,price);
+        return Objects.hash(id, categorieId,unitMeasureId,groceryId,name,price);
     }
 }

@@ -7,13 +7,15 @@ public final class CreateProductCommand implements Command {
     private final String id;
     private final String categorieId;
     private final String unitMeasureId;
+	private final String groceryId;
     private final String name;
     private final Double price;
     
-    public CreateProductCommand(String id, String categorieId, String unitMeasureId, String name, Double price) {
+    public CreateProductCommand(String id, String categorieId, String unitMeasureId,String groceryId,String name, Double price) {
         this.id       		= id;
         this.categorieId    = categorieId;
         this.unitMeasureId 	= unitMeasureId;
+        this.groceryId 		= groceryId;
         this.name 			= name;
         this.price 			= price;
     }
@@ -32,5 +34,8 @@ public final class CreateProductCommand implements Command {
     } 
     public Double price() {
     	return price;
+    } 
+    public String groceryId() {
+    	return groceryId;
     } 
 }

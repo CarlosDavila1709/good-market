@@ -12,6 +12,7 @@ public final class ProductCatalog {
     private final String categorieName;
     private final String unitMeasureId;
     private final String unitMeasureName;
+    private final String groceryId;
     private final String name;
     private final Double price;
     
@@ -21,10 +22,18 @@ public final class ProductCatalog {
         this.unitMeasureId = null;
         this.unitMeasureName = null;
         this.categorieId = null;
+        this.groceryId = null;
         this.categorieName = null;
         this.price = null;
     }
-    public ProductCatalog(ProductCatalogId id, String name, String categorieId, String categorieName,String unitMeasureId,String unitMeasureName,Double price) {
+    public ProductCatalog(ProductCatalogId id, 
+    		String name, 
+    		String categorieId, 
+    		String categorieName,
+    		String unitMeasureId,
+    		String groceryId,
+    		String unitMeasureName,
+    		Double price) {
         this.id = id;
         this.name = name;
         this.unitMeasureId = unitMeasureId;
@@ -32,6 +41,7 @@ public final class ProductCatalog {
         this.categorieId = categorieId;
         this.categorieName = categorieName;
         this.price = price;
+        this.groceryId = groceryId;
     }
     public static ProductCatalog fromPrimitives(Map<String, Object> plainData) {
         return new ProductCatalog(
@@ -40,6 +50,7 @@ public final class ProductCatalog {
             (String) plainData.get("categorieName"),
             (String) plainData.get("unitMeasureId"),
             (String) plainData.get("unitMeasureName"),
+            (String) plainData.get("groceryId"),
             (String) plainData.get("name"),
             (Double) plainData.get("price")
         );
@@ -59,6 +70,9 @@ public final class ProductCatalog {
     public String unitMeasureName() {
         return unitMeasureName;
     }
+    public String groceryId() {
+        return groceryId;
+    }
     public String name() {
         return name;
     }
@@ -75,6 +89,7 @@ public final class ProductCatalog {
             put("unitMeasureId", unitMeasureId);
             put("unitMeasureName", unitMeasureName);
             put("price", price.toString());
+            put("groceryId", groceryId);
         }};
     }
 
@@ -93,6 +108,6 @@ public final class ProductCatalog {
 
     @Override
     public int hashCode() {
-        return Objects.hash( id,  name, categorieId, categorieName, unitMeasureId, unitMeasureName, price);
+        return Objects.hash( id,  name, categorieId, categorieName, unitMeasureId, groceryId,unitMeasureName, price);
     }
 }

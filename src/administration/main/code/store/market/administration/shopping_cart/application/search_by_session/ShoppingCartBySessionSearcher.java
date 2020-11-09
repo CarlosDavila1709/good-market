@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 
 import store.market.administration.shopping_cart.application.ShoppingCartResponse;
 import store.market.administration.shopping_cart.application.ShoppingCartsResponse;
+import store.market.administration.shopping_cart.domain.ShoppingCart;
 import store.market.administration.shopping_cart.domain.ShoppingCartRepository;
+import store.market.administration.shopping_cart.domain.ShoppingCartSessionId;
 import store.market.shared.domain.Service;
 import store.market.shared.domain.criteria.Criteria;
 import store.market.shared.domain.criteria.Filter;
@@ -25,6 +27,7 @@ public final class ShoppingCartBySessionSearcher {
 		
 	}
 	
+	/*
 	public ShoppingCartsResponse search(String sessionId) {
 		Filter filter = Filter.create("sessionId", "=", sessionId);
 		List<Filter> filtersList = new ArrayList<Filter>();
@@ -40,5 +43,16 @@ public final class ShoppingCartBySessionSearcher {
         return new ShoppingCartsResponse(
                 repository.matching(criteria).stream().map(ShoppingCartResponse::fromAggregate).collect(Collectors.toList())
             );
+      
+	}
+	*/
+	public  ShoppingCartResponse search(String sessionId) {
+		
+		Optional<ShoppingCart> response = repository.search( new ShoppingCartSessionId(sessionId));
+		
+		if( !response.isPresent() ) {
+			return null;
+		}
+		return ShoppingCartResponse.fromAggregate(repository.search( new ShoppingCartSessionId(sessionId)).get());
 	}
 }

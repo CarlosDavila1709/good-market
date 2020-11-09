@@ -1,5 +1,6 @@
 package store.market.administration.shopping_cart.application.add_product_to_card;
 
+import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product.domain.ProductId;
 import store.market.administration.shopping_cart.domain.ShoppingCartQuantity;
 import store.market.administration.shopping_cart.domain.ShoppingCartSessionId;
@@ -21,7 +22,7 @@ public final class AddProductShoppingCartCommandHandler implements CommandHandle
         ShoppingCartSessionId 	sessionId  		= new ShoppingCartSessionId(command.sessionId());
         ProductId  				productId 		= new ProductId(command.productId());
         ShoppingCartQuantity 	quantity 		= new ShoppingCartQuantity(command.quantity());
-        
-        aggregator.add(sessionId,productId,quantity);
+        BackofficeGroceryId     groceryId		= new BackofficeGroceryId(command.groceryId());
+        aggregator.add(sessionId,groceryId,productId,quantity);
     }
 }

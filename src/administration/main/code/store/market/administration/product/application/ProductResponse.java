@@ -8,18 +8,20 @@ public final class ProductResponse implements Response {
     private final String id;
     private final String categorieId;
     private final String unitMeasureId;
+    private final String groceryId;
     private final String name;
     private final Double price;
     
-    public ProductResponse(String id, String categorieId, String unitMeasureId, String name, Double price) {
-        this.id       = id;
-        this.categorieId     = categorieId;
-        this.unitMeasureId = unitMeasureId;
-        this.name = name;
-        this.price = price;
+    public ProductResponse(String id, String categorieId, String unitMeasureId, String groceryId,String name, Double price) {
+        this.id       		= id;
+        this.categorieId    = categorieId;
+        this.unitMeasureId	= unitMeasureId;
+        this.groceryId		= groceryId;
+        this.name 			= name;
+        this.price 			= price;
     }
     public static ProductResponse fromAggregate(Product product) {
-        return new ProductResponse(product.id().value(),product.categorieId().value(),product.unitMeasureId().value(),product.name().value(),product.price().value());
+        return new ProductResponse(product.id().value(),product.categorieId().value(),product.unitMeasureId().value(),product.groceryId().value(),product.name().value(),product.price().value());
     }
 
     public String id() {
@@ -30,6 +32,9 @@ public final class ProductResponse implements Response {
     }
     public String unitMeasureId() {
     	return unitMeasureId;
+    }
+    public String groceryId() {
+    	return groceryId;
     }
     public String name() {
     	return name;

@@ -11,6 +11,9 @@
         <component name="sessionId" class="store.market.administration.shopping_cart.domain.ShoppingCartSessionId" access="field">
             <property name="value" column="session_id" type="string" access="field" />
         </component>
+        <component name="groceryId" class="store.market.administration.grocery.domain.BackofficeGroceryId" access="field">
+            <property name="value" column="grocery_id" type="string" access="field" />
+        </component>
         <component name="amountTotal" class="store.market.administration.shopping_cart.domain.ShoppingCartAmountTotal" access="field">
             <property name="value" column="amount_total" type="double" access="field" />
         </component>

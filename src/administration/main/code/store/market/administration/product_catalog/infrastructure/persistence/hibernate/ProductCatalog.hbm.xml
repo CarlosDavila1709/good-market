@@ -13,6 +13,7 @@
         <property name="categorieName" column="categorie_name" type="string" access="field" />
         <property name="unitMeasureId" column="unit_measure_id" type="string" access="field" />
         <property name="unitMeasureName" column="unit_measure_name" type="string" access="field" />
+        <property name="groceryId" column="grocery_id" type="string" access="field" />
         <property name="name" column="name" type="string" access="field" />
         <property name="price" column="price" type="double" access="field" />
        

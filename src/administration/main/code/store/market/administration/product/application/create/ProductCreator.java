@@ -1,5 +1,6 @@
 package store.market.administration.product.application.create;
 
+import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product.domain.Product;
 import store.market.administration.product.domain.ProductCategorieId;
 import store.market.administration.product.domain.ProductId;
@@ -21,8 +22,9 @@ public final class ProductCreator {
         this.eventBus   = eventBus;
     }
 
-    public void create(ProductId id, ProductCategorieId categorieId, ProductUnitMeasureId unitMeasureId, ProductName name, ProductPrice price) {
-        Product product = Product.create(id, categorieId, unitMeasureId, name, price);
+    public void create(ProductId id, ProductCategorieId categorieId, ProductUnitMeasureId unitMeasureId, BackofficeGroceryId groceryId,ProductName name, ProductPrice price) {
+       
+    	Product product = Product.create(id, categorieId, unitMeasureId, groceryId,name, price);
 
         repository.save(product);
         eventBus.publish(product.pullDomainEvents());
