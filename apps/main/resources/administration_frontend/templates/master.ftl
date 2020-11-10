@@ -12,6 +12,7 @@
 
     <title>${title}</title>
     <title>${description}</title>
+
 </head>
 <body>
 <#include "partials/header.ftl">

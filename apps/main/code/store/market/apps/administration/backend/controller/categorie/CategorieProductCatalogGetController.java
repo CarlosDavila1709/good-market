@@ -1,4 +1,4 @@
-package store.market.apps.administration.backend.controller.product_catalog;
+package store.market.apps.administration.backend.controller.categorie;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,10 +23,9 @@ import store.market.shared.infrastructure.spring.ApiController;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
-public final class ProductCatalogCategorieGetController extends ApiController {
+public final class CategorieProductCatalogGetController  extends ApiController {
 
-
-	public ProductCatalogCategorieGetController(QueryBus queryBus, CommandBus commandBus) {
+	public CategorieProductCatalogGetController(QueryBus queryBus, CommandBus commandBus) {
 		
 		super(queryBus, commandBus);
 	}

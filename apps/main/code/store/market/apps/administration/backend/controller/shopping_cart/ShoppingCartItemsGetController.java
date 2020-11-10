@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import store.market.administration.shopping_cart_item.application.CartItemsResponse;
@@ -33,13 +33,13 @@ public final class ShoppingCartItemsGetController extends ApiController{
 	}
 	
 
-	@GetMapping("/shopping-cart-items/{session_id}")
-    public List<HashMap<String, String>> index(@PathVariable String session_id) throws QueryHandlerExecutionError {
+	@GetMapping("/shopping-cart-items")
+    public List<HashMap<String, String>> index(@RequestParam String  sessionid) throws QueryHandlerExecutionError {
 		HashMap<String, Serializable> params = new HashMap<String, Serializable>();
 		
 		params.put("filters[1][field]", "sessionId");
 		params.put("filters[1][operator]", "=");
-		params.put("filters[1][value]", session_id);
+		params.put("filters[1][value]", sessionid);
 		
 		CartItemsResponse items = ask(
 	            new SearchCartItemsByCriteriaQuery(

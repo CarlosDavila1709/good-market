@@ -75,5 +75,5 @@ function tableCellFor(text) {
 </script>
 <script>
 	addFootCart("http://localhost:8093/shopping-carts?sessionid="+"${session_id}");
-    addBodyCartItemsList("http://localhost:8093/shopping-cart-items/"+"${session_id}");
+    addBodyCartItemsList("http://localhost:8093/shopping-cart-items?sessionid="+"${session_id}");
 </script>
