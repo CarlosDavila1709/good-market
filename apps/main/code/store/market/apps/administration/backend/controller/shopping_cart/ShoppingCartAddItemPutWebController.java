@@ -33,10 +33,10 @@ public class ShoppingCartAddItemPutWebController  extends ApiController{
     ) throws CommandHandlerExecutionError {
     	
     	dispatch(new AddProductShoppingCartCommand(
-    			request.sessionId ,
-            	request.groceryId,
-                request.productId,
-                request.quantity
+    			request.sessionId() ,
+            	request.groceryId(),
+                request.productId(),
+                request.quantity()
             ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -47,27 +47,41 @@ public class ShoppingCartAddItemPutWebController  extends ApiController{
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
         return null;
     }
+
+}
+
+final class Request {
+    private String sessionId;
+    private String groceryId;
+    private String productId;
+    private int quantity;
     
-    final class Request {
-        private String sessionId;
-        private String groceryId;
-        private String productId;
-        private int quantity;
-        
-        public void sessionId(String sessionId) {
-            this.sessionId = sessionId;
-        }
-        
-        public void groceryId(String groceryId) {
-            this.groceryId = groceryId;
-        }
-        
-        public void productId(String productId) {
-            this.productId = productId;
-        }
-        
-        public void quantity(int quantity) {
-            this.quantity = quantity;
-        }
+    public void sessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+    
+    public void groceryId(String groceryId) {
+        this.groceryId = groceryId;
+    }
+    
+    public void productId(String productId) {
+        this.productId = productId;
+    }
+    
+    public void quantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    public String sessionId() {
+    	return sessionId;
+    }
+    public String groceryId() {
+    	return groceryId;
+    }
+    public String productId() {
+    	return productId;
+    }
+    public int quantity() {
+    	return quantity;
     }
 }

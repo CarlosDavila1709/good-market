@@ -31,9 +31,9 @@ public class UnitMeasurePutController extends ApiController{
     	
     	dispatch(new CreateUnitMeasureCommand(
                 id,
-                request.groceryId,
-                request.name,
-                request.prefix
+                request.groceryId(),
+                request.name(),
+                request.prefix()
             ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -42,30 +42,31 @@ public class UnitMeasurePutController extends ApiController{
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
         return null;
     }
-    
-    final class Request {
 
-        private String groceryId;
-        private String name;
-        private String prefix;
+}
 
-        public void setGroceryId(String groceryId) {
-            this.groceryId = groceryId;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public void prefix(String prefix) {
-            this.prefix = prefix;
-        }
-        String name() {
-            return name;
-        }
-        String groceryId() {
-            return groceryId;
-        }
-        String prefix() {
-            return prefix;
-        }
+final class Request {
+
+    private String groceryId;
+    private String name;
+    private String prefix;
+
+    public void setGroceryId(String groceryId) {
+        this.groceryId = groceryId;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void prefix(String prefix) {
+        this.prefix = prefix;
+    }
+    String name() {
+        return name;
+    }
+    String groceryId() {
+        return groceryId;
+    }
+    String prefix() {
+        return prefix;
     }
 }

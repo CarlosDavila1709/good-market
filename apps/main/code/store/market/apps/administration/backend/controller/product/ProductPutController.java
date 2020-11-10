@@ -31,11 +31,11 @@ public class ProductPutController extends ApiController{
     	
     	dispatch(new CreateProductCommand(
                 id,
-                request.categorieId,
-                request.measureId,
-                request.groceryId,
-                request.name,
-                request.price
+                request.categorieId(),
+                request.measureId(),
+                request.groceryId(),
+                request.name(),
+                request.price()
             ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -47,43 +47,44 @@ public class ProductPutController extends ApiController{
         return null;
     }
     
-    final class Request {
-        private String groceryId;
-    	private String categorieId;
-        private String measureId;
-        private String name;
-        private Double price;
 
-        public void setGroceryId(String groceryId) {
-            this.groceryId = groceryId;
-        }
-        public void categorieId(String categorieId) {
-            this.categorieId = categorieId;
-        }
-        public void measureId(String measureId) {
-            this.measureId = measureId;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public void price(Double price) {
-            this.price = price;
-        }
-        
-        String groceryId() {
-            return groceryId;
-        }
-        String categorieId() {
-            return categorieId;
-        }
-        String measureId() {
-            return measureId;
-        }
-        String name() {
-            return name;
-        }
-        Double price() {
-            return price;
-        }
+}
+final class Request {
+    private String groceryId;
+	private String categorieId;
+    private String measureId;
+    private String name;
+    private Double price;
+
+    public void setGroceryId(String groceryId) {
+        this.groceryId = groceryId;
+    }
+    public void categorieId(String categorieId) {
+        this.categorieId = categorieId;
+    }
+    public void measureId(String measureId) {
+        this.measureId = measureId;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void price(Double price) {
+        this.price = price;
+    }
+    
+    String groceryId() {
+        return groceryId;
+    }
+    String categorieId() {
+        return categorieId;
+    }
+    String measureId() {
+        return measureId;
+    }
+    String name() {
+        return name;
+    }
+    Double price() {
+        return price;
     }
 }
