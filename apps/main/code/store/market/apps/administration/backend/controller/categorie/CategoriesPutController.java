@@ -32,8 +32,8 @@ public class CategoriesPutController extends ApiController{
     	
     	dispatch(new CreateCategorieCommand(
                 id,
-                request.groceryId,
-                request.name
+                request.groceryId(),
+                request.name()
             ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -44,25 +44,25 @@ public class CategoriesPutController extends ApiController{
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
         return null;
     }
-    
-    final class Request {
+}
 
-        private String groceryId;
-        private String name;
+final class Request {
 
-        public void setGroceryId(String groceryId) {
-            this.groceryId = groceryId;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
+    private String groceryId;
+    private String name;
 
-        String name() {
-            return name;
-        }
-        String groceryId() {
-            return groceryId;
-        }
+    public void setGroceryId(String groceryId) {
+        this.groceryId = groceryId;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
+    String name() {
+        return name;
+    }
+    
+    String groceryId() {
+        return groceryId;
+    }
 }
