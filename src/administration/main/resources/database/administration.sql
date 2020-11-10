@@ -58,3 +58,12 @@ CREATE TABLE  IF NOT EXISTS cart_items (
     quantity INT NOT NULL,
     PRIMARY KEY (id)
 ) ;
+CREATE TABLE  IF NOT EXISTS customers (
+    id CHAR(36) NOT NULL,
+    customer_phone VARCHAR(255) NOT NULL,
+    customer_first_name VARCHAR(255) NOT NULL,
+    customer_last_name VARCHAR(255) NOT NULL,
+    customer_middle_name VARCHAR(255) NOT NULL,
+    customer_address DECIMAL(13, 2) NOT NULL,
+    PRIMARY KEY (id)
+) ;
