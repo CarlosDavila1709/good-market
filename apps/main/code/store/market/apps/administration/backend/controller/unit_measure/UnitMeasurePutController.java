@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import store.market.administration.unit_measure.application.create.CreateUnitMeasureCommand;
 
@@ -16,6 +17,7 @@ import store.market.shared.domain.bus.command.CommandHandlerExecutionError;
 import store.market.shared.domain.bus.query.QueryBus;
 import store.market.shared.infrastructure.spring.ApiController;
 
+@RestController
 public class UnitMeasurePutController extends ApiController{
 
     public UnitMeasurePutController(
@@ -57,7 +59,7 @@ final class Request {
     public void setName(String name) {
         this.name = name;
     }
-    public void prefix(String prefix) {
+    public void setPrefix(String prefix) {
         this.prefix = prefix;
     }
     String name() {
