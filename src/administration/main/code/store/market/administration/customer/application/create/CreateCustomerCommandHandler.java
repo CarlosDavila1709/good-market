@@ -21,12 +21,12 @@ public final class CreateCustomerCommandHandler implements CommandHandler<Create
     @Override
     public void handle(CreateCustomerCommand command) {
 
-        CustomerId id = new CustomerId();
-		CustomerPhone  customerPhone = new CustomerPhone();
-		CustomerFirstName customerFirstName = new CustomerFirstName();
-		CustomerLastName customerLastName = new CustomerLastName();
-		CustomerMiddleName customerMiddleName = new CustomerMiddleName();
-		CustomerAddress customerAddress = new CustomerAddress();
+        CustomerId id = new CustomerId(command.id());
+		CustomerPhone  customerPhone = new CustomerPhone(command.customerPhone());
+		CustomerFirstName customerFirstName = new CustomerFirstName(command.customerFirstName());
+		CustomerLastName customerLastName = new CustomerLastName(command.customerLastName());
+		CustomerMiddleName customerMiddleName = new CustomerMiddleName(command.customerMiddleName());
+		CustomerAddress customerAddress = new CustomerAddress(command.customerAddress());
 
         creator.create(id, customerPhone, customerFirstName,  customerLastName, customerMiddleName,  customerAddress);
     }

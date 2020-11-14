@@ -1,4 +1,4 @@
-package store.market.administration.shopping_cart.application.search_by_session;
+package store.market.administration.shopping_cart.application.search_by_session_active;
 
 import store.market.administration.shopping_cart.application.ShoppingCartResponse;
 import store.market.administration.shopping_cart.application.ShoppingCartsResponse;

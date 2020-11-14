@@ -3,7 +3,7 @@ package store.market.administration.shopping_cart_item.application.add_item;
 import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product.application.ProductResponse;
 import store.market.administration.product.application.find.FindProductQuery;
-
+import store.market.administration.shopping_cart.domain.ShoppingCartId;
 import store.market.administration.shopping_cart_item.domain.ShoppingCartSessionId;
 import store.market.administration.shopping_cart_item.domain.*;
 
@@ -25,7 +25,7 @@ public final class AddItemsOnCart {
     	this.queryBus = queryBus;
 	}
 	
-	public void add(ShoppingCartSessionId sessionId, CartItemProductId productId, CartItemQuantity quantity,BackofficeGroceryId groceryId) {
+	public void add(ShoppingCartId cartId ,ShoppingCartSessionId sessionId, CartItemProductId productId, CartItemQuantity quantity,BackofficeGroceryId groceryId) {
 		
 		ProductResponse product = queryBus.ask(new FindProductQuery(productId.value()));
 		
@@ -33,8 +33,9 @@ public final class AddItemsOnCart {
 				.orElseGet(
 						() -> CartItem.initialize(
 								new CartItemId(uuidGenerator.generate()),
-								new ShoppingCartSessionId(sessionId.value()), 
-								new CartItemProductId(productId.value()), 
+								cartId,
+								sessionId, 
+								productId, 
 								new CartItemProductPrice(product.price()), 
 								new CartItemProductName(product.name()),
 								groceryId)

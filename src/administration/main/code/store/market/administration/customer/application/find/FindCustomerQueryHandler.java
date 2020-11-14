@@ -1,10 +1,13 @@
 package store.market.administration.customer.application.find;
 
+
 import store.market.administration.customer.application.CustomerResponse;
 import store.market.administration.customer.domain.CustomerId;
 import store.market.administration.customer.domain.CustomerNotExist;
+import store.market.shared.domain.Service;
 import store.market.shared.domain.bus.query.QueryHandler;
 
+@Service
 public class FindCustomerQueryHandler  implements QueryHandler<FindCustomerQuery, CustomerResponse> {
 
     private final CustomerFinder finder;

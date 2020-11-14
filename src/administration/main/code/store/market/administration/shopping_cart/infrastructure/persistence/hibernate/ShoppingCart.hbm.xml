@@ -20,9 +20,12 @@
         <component name="totalItems" class="store.market.administration.shopping_cart.domain.ShoppingCartCounterItems" access="field">
             <property name="value" column="total_items" type="integer" access="field" />
         </component>
+        <component name="status" class="store.market.administration.shopping_cart.domain.ShoppingCartStatus" access="field">
+            <property name="value" column="status" type="string" access="field" />
+        </component>
         <property name="existingProducts" column="existing_products" access="field">
             <type name="json_string">
-                <param name="list_of">store.market.administration.product.domain.ProductId</param>
+                <param name="list_of">store.market.administration.product_catalog.domain.ProductCatalogId</param>
             </type>
         </property>
     </class>

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import store.market.administration.shopping_cart.application.ShoppingCartResponse;
-import store.market.administration.shopping_cart.application.search_by_session.SearchShoppingCartBySessionQuery;
+import store.market.administration.shopping_cart.application.search_by_session_active.SearchShoppingCartBySessionQuery;
 import store.market.apps.webstore.frontend.controller.abstract_controller.AbstractSessionesController;
 import store.market.shared.domain.bus.query.QueryBus;
 import store.market.shared.domain.bus.query.QueryHandlerExecutionError;

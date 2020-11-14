@@ -54,9 +54,8 @@ public class PgSqlShoppingCartRepository extends HibernateRepository<ShoppingCar
 	}
 
 	@Override
-	public Optional<ShoppingCart> search(ShoppingCartSessionId id) {
-    	
-		Filters filters = filtersSessionProduct(id);
+	public Optional<ShoppingCart> searchSession(ShoppingCartSessionId id) {
+		Filters filters = filtersSession(id);
         Criteria criteria = new Criteria(
         		filters,
                 Order.none(),
@@ -67,11 +66,10 @@ public class PgSqlShoppingCartRepository extends HibernateRepository<ShoppingCar
         List<ShoppingCart> carts = byCriteria(criteria);
         return 0 ==  carts.size() ? Optional.empty() : Optional.ofNullable(carts.get(0));
 	}
-	
-    private Filters filtersSessionProduct(ShoppingCartSessionId sessionId) {
+    private Filters filtersSession(ShoppingCartSessionId sessionId) {
 		
     	Filter filterSession = Filter.create("sessionId", "=", sessionId.value());
-		
+
 		List<Filter> filtersList = new ArrayList<Filter>();
 		filtersList.add(filterSession);
 		

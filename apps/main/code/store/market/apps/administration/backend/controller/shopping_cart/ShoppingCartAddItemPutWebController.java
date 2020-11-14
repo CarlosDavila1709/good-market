@@ -28,7 +28,7 @@ public class ShoppingCartAddItemPutWebController  extends ApiController{
         }
     
     
-    @PutMapping(value = "/shopping-cart-add")
+    @PutMapping(value = "/shopping-cart/add")
     public ResponseEntity<String> index(@RequestBody Request request
     ) throws CommandHandlerExecutionError {
     	
@@ -56,19 +56,19 @@ final class Request {
     private String productId;
     private int quantity;
     
-    public void sessionId(String sessionId) {
+    public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
     
-    public void groceryId(String groceryId) {
+    public void setGroceryId(String groceryId) {
         this.groceryId = groceryId;
     }
     
-    public void productId(String productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
     
-    public void quantity(int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
     

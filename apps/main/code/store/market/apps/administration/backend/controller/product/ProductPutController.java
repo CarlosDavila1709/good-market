@@ -59,16 +59,16 @@ final class Request {
     public void setGroceryId(String groceryId) {
         this.groceryId = groceryId;
     }
-    public void categorieId(String categorieId) {
+    public void setCategorieId(String categorieId) {
         this.categorieId = categorieId;
     }
-    public void measureId(String measureId) {
+    public void setMeasureId(String measureId) {
         this.measureId = measureId;
     }
     public void setName(String name) {
         this.name = name;
     }
-    public void price(Double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     

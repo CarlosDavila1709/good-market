@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import store.market.administration.grocery.domain.BackofficeGroceryId;
-import store.market.administration.product.domain.ProductId;
+import store.market.administration.product_catalog.domain.ProductCatalogId;
 import store.market.shared.domain.AggregateRoot;
 import store.market.shared.domain.shopping_cart.ProductToShoppingCartAggregateDomainEvent;
 
@@ -22,17 +22,20 @@ public final class ShoppingCart extends AggregateRoot{
 	
 	private ShoppingCartCounterItems 		totalItems;
 	
-    private List<ProductId>      			existingProducts;
+    private List<ProductCatalogId>      	existingProducts;
 	
     private ShoppingCartQuantity 			quantity;
+    
+    private ShoppingCartStatus status;
     
 	public ShoppingCart(ShoppingCartId id,
 			ShoppingCartSessionId sessionId, 
 			BackofficeGroceryId		groceryId,
 			ShoppingCartAmountTotal amountTotal,
 			ShoppingCartCounterItems totalItems, 
-			List<ProductId> existingProducts,
-			ShoppingCartQuantity quantity) {
+			List<ProductCatalogId> existingProducts,
+			ShoppingCartQuantity quantity,
+			ShoppingCartStatus status) {
 		
 		this.id = id;
 		this.sessionId = sessionId;
@@ -41,6 +44,7 @@ public final class ShoppingCart extends AggregateRoot{
 		this.existingProducts = existingProducts;
 		this.totalItems = totalItems;
 		this.quantity = quantity;
+		this.status = status;
 	}
 
 	public ShoppingCart() {
@@ -51,12 +55,14 @@ public final class ShoppingCart extends AggregateRoot{
 		this.totalItems = null;
 		this.existingProducts = null;
 		this.quantity = null;
+		this.status = null;
 	}
 
     public static ShoppingCart initialize(
     		ShoppingCartId id,
     		ShoppingCartSessionId sessionId,
-    		BackofficeGroceryId		groceryId) {
+    		BackofficeGroceryId		groceryId,
+    		ShoppingCartStatus status) {
         
     	ShoppingCart shoppingCart = new ShoppingCart( 
     			id, 
@@ -65,7 +71,8 @@ public final class ShoppingCart extends AggregateRoot{
     			new ShoppingCartAmountTotal(0.00), 
     			ShoppingCartCounterItems.initialize(), 
     			new ArrayList<>(), 
-    			ShoppingCartQuantity.initialize());
+    			ShoppingCartQuantity.initialize(),
+    			status);
 
     	return shoppingCart;
     }
@@ -81,7 +88,7 @@ public final class ShoppingCart extends AggregateRoot{
 	public ShoppingCartCounterItems totalItems() {
 		return totalItems;
 	}
-	public List<ProductId> existingProducts(){
+	public List<ProductCatalogId> existingProducts(){
 		return existingProducts;
 	}
 	public ShoppingCartQuantity quantity() {
@@ -89,6 +96,12 @@ public final class ShoppingCart extends AggregateRoot{
 	}
 	public BackofficeGroceryId	groceryId() {
 		return groceryId;
+	}
+	public ShoppingCartStatus status() {
+		return status;
+	}
+	public void updateStatus(ShoppingCartStatus status) {
+		this.status = status;
 	}
 	public void addAmount(ShoppingCartAmountTotal amountTotal,ShoppingCartQuantity quantity) {
 		
@@ -98,7 +111,7 @@ public final class ShoppingCart extends AggregateRoot{
 
 	}
 
-    public void addProduct(ProductId productId, ShoppingCartQuantity quantity) {
+    public void addProduct(ProductCatalogId productId, ShoppingCartQuantity quantity) {
     	
     	totalItems = totalItems.increment(quantity.value());
     	
@@ -115,7 +128,7 @@ public final class ShoppingCart extends AggregateRoot{
 		this.amountTotal = this.amountTotal.subtract(amountTotal.value());
 	}
 	
-    public boolean existsProduct(ProductId id) {
+    public boolean existsProduct(ProductCatalogId id) {
         return existingProducts.contains(id);
     }
     
@@ -135,6 +148,6 @@ public final class ShoppingCart extends AggregateRoot{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sessionId,groceryId,amountTotal,totalItems,existingProducts,quantity);
+        return Objects.hash(id, sessionId,groceryId,amountTotal,totalItems,existingProducts,quantity,status);
     }
 }

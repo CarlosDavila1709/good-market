@@ -4,8 +4,9 @@ import store.market.administration.customer.application.CustomerResponse;
 import store.market.administration.customer.domain.CustomerId;
 import store.market.administration.customer.domain.CustomerNotExist;
 import store.market.administration.customer.domain.CustomerRepository;
+import store.market.shared.domain.Service;
 
-
+@Service
 public class CustomerFinder {
 
     private final CustomerRepository repository;

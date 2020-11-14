@@ -12,4 +12,6 @@ public interface CustomerRepository {
     Optional<Customer> search(CustomerId id);
 
     List<Customer> matching(Criteria criteria);
+    
+    Optional<Customer> searchByPhone(CustomerPhone phone);
 }

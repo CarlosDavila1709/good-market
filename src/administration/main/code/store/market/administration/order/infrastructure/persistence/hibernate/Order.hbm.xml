@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="store.market.administration.order.domain.Order" table="order">
+    <class name="store.market.administration.order.domain.Order" table="orders">
         <composite-id name="id" class="store.market.administration.order.domain.OrderId" access="field">
             <key-property column="id" name="value" length="36" access="field" />
         </composite-id>
@@ -21,11 +21,11 @@
             <property name="value" column="total_items" type="integer" access="field" />
         </component>
         <component name="status" class="store.market.administration.order.domain.OrderStatus" access="field">
-            <property name="value" column="order_type" type="string" access="field" />
+            <property name="value" column="status" type="string" access="field" />
         </component>
         <property name="existingProducts" column="existing_products" access="field">
             <type name="json_string">
-                <param name="list_of">store.market.administration.product.domain.ProductId</param>
+                <param name="list_of">store.market.administration.product_catalog.domain.ProductCatalogId</param>
             </type>
         </property>
     </class>

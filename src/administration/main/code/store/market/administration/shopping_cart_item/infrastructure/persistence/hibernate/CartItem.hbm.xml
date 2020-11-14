@@ -8,6 +8,9 @@
         <composite-id name="id" class="store.market.administration.shopping_cart_item.domain.CartItemId" access="field">
             <key-property column="id" name="value" length="36" access="field" />
         </composite-id>
+        <component name="shoppingCartId" class="store.market.administration.shopping_cart.domain.ShoppingCartId" access="field">
+            <property name="value" column="shopping_cart_id" type="string" access="field" />
+        </component>
         <component name="sessionId" class="store.market.administration.shopping_cart_item.domain.ShoppingCartSessionId" access="field">
             <property name="value" column="session_id" type="string" access="field" />
         </component>

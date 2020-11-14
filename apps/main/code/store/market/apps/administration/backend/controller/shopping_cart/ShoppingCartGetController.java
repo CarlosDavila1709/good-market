@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import store.market.administration.shopping_cart.application.ShoppingCartResponse;
-
-import store.market.administration.shopping_cart.application.search_by_session.SearchShoppingCartBySessionQuery;
+import store.market.administration.shopping_cart.application.search_by_session_active.SearchShoppingCartBySessionQuery;
 import store.market.administration.shopping_cart.domain.ShoppingCartNotExist;
 import store.market.shared.domain.DomainError;
 import store.market.shared.domain.bus.command.CommandBus;
