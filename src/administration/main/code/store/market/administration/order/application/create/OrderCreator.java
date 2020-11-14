@@ -1,6 +1,9 @@
 package store.market.administration.order.application.create;
 
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+
 
 import store.market.administration.customer.application.CustomerResponse;
 import store.market.administration.customer.application.find.FindCustomerQuery;
@@ -8,6 +11,7 @@ import store.market.administration.customer.domain.CustomerId;
 import store.market.administration.customer.domain.CustomerNotExist;
 
 import store.market.administration.order.domain.Order;
+import store.market.administration.order.domain.OrderDateCreation;
 import store.market.administration.order.domain.OrderId;
 import store.market.administration.order.domain.OrderRepository;
 import store.market.administration.order.domain.OrderStatus;
@@ -18,6 +22,7 @@ import store.market.administration.shopping_cart.application.search_by_session_a
 import store.market.administration.shopping_cart.domain.SessionNotExistNotInitialized;
 
 import store.market.shared.domain.Service;
+import store.market.shared.domain.Utils;
 import store.market.shared.domain.bus.event.EventBus;
 import store.market.shared.domain.bus.query.QueryBus;
 
@@ -52,7 +57,8 @@ public final class OrderCreator {
 				new OrderStatus(StatusType.ADMITTED.codigo()), 
 				customer,
 				shopping,
-				new ArrayList<>());
+				new ArrayList<>(),
+				new OrderDateCreation(Utils.dateToString(LocalDateTime.now())));
 		
 		shopping.existingProducts().forEach(
 				productId -> order.incrementProduct(new ProductCatalogId(productId))

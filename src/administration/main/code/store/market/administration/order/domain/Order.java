@@ -20,8 +20,9 @@ public final class Order extends AggregateRoot{
 	private OrderCounterItems totalItems;
 	private OrderStatus status;
     private List<ProductCatalogId> existingProducts;
+    private OrderDateCreation dateCreation;
 	
-    public Order(OrderId id, BackofficeGroceryId groceryId, CustomerId customerId,OrderAmountTotal amountTotal,OrderCounterItems totalItems,OrderStatus status,List<ProductCatalogId> existingProducts) {
+    public Order(OrderId id, BackofficeGroceryId groceryId, CustomerId customerId,OrderAmountTotal amountTotal,OrderCounterItems totalItems,OrderStatus status,List<ProductCatalogId> existingProducts,OrderDateCreation dateCreation) {
         this.id               = id;
         this.groceryId        = groceryId;
         this.customerId 	  = customerId;
@@ -29,7 +30,7 @@ public final class Order extends AggregateRoot{
         this.totalItems 	  = totalItems;
         this.status	 		  = status;
         this.existingProducts = existingProducts;
-
+        this.dateCreation     = dateCreation;
     }
     public Order() {
         this.id             = null;
@@ -39,10 +40,10 @@ public final class Order extends AggregateRoot{
         this.totalItems 	= null;
         this.status 		= null;
         this.existingProducts = null;
-        
+        this.dateCreation     = null;
     }
     
-    public static Order create(OrderId id, OrderStatus status,CustomerResponse customer,ShoppingCartResponse shopping,List<ProductCatalogId> existingProducts) {
+    public static Order create(OrderId id, OrderStatus status,CustomerResponse customer,ShoppingCartResponse shopping,List<ProductCatalogId> existingProducts,OrderDateCreation dateCreation) {
         
     	Order order = new Order( id,  
     			new BackofficeGroceryId(shopping.groceryId()),  
@@ -50,7 +51,8 @@ public final class Order extends AggregateRoot{
     			new OrderAmountTotal(shopping.amountTotal()), 
     			new OrderCounterItems( shopping.totalItems()), 
     			status, 
-    			existingProducts);
+    			existingProducts,
+    			dateCreation);
 
     	order.record(new OrderCreatedDomainEvent(id.value(), shopping.sessionId(),shopping.id()));
         return order;
@@ -80,7 +82,9 @@ public final class Order extends AggregateRoot{
     public List<ProductCatalogId> existingProducts() {
     	return existingProducts;
     }
-
+    public OrderDateCreation dateCreation() {
+    	return dateCreation;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,6 +104,6 @@ public final class Order extends AggregateRoot{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,  groceryId,  customerId, amountTotal, totalItems, status, existingProducts);
+        return Objects.hash(id,  groceryId,  customerId, amountTotal, totalItems, status, existingProducts,dateCreation);
     }
 }
