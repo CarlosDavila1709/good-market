@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import store.market.administration.customer.application.CustomerResponse;
 import store.market.administration.customer.application.create.CreateCustomerCommand;
+import store.market.administration.customer.application.search_by_phone.SearchCustomerByPhoneQuery;
+import store.market.administration.customer.application.update.UpdateCustomerCommand;
 import store.market.shared.domain.DomainError;
 import store.market.shared.domain.bus.command.CommandBus;
 import store.market.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -26,12 +29,30 @@ public class CustomersPutController extends ApiController {
     @PutMapping(value = "/customers/{id}")
     public ResponseEntity<String> index(@PathVariable String id, @RequestBody Request request ) throws CommandHandlerExecutionError 
 	{
-    	dispatch( new CreateCustomerCommand(id, 
-    			request.phone(), 
-    			request.firstName(), 
-    			request.lastName(), 
-    			request.middleName(), 
-    			request.address()));
+    	CustomerResponse response =ask(new SearchCustomerByPhoneQuery(request.phone()));
+
+    	if(response != null) {
+    		
+    		
+        	dispatch( new UpdateCustomerCommand(id, 
+        			request.phone(), 
+        			request.firstName(), 
+        			request.lastName(), 
+        			request.middleName(), 
+        			request.address()));
+    	
+    	}else {
+    		
+        	dispatch( new CreateCustomerCommand(id, 
+        			request.phone(), 
+        			request.firstName(), 
+        			request.lastName(), 
+        			request.middleName(), 
+        			request.address()));
+    	}
+    	
+
+    	
     	return new ResponseEntity<>(HttpStatus.CREATED);
 	}
     @Override

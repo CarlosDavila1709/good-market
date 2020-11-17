@@ -7,11 +7,11 @@ import store.market.shared.domain.AggregateRoot;
 public final class Customer extends AggregateRoot{
 
 	private final CustomerId id;
-	private final CustomerPhone customerPhone;
-	private final CustomerFirstName customerFirstName;
-	private final CustomerLastName customerLastName;
-	private final CustomerMiddleName customerMiddleName;
-	private final CustomerAddress customerAddress;
+	private CustomerPhone customerPhone;
+	private CustomerFirstName customerFirstName;
+	private CustomerLastName customerLastName;
+	private CustomerMiddleName customerMiddleName;
+	private CustomerAddress customerAddress;
 	
 	public Customer(CustomerId id,CustomerPhone customerPhone,CustomerFirstName customerFirstName, CustomerLastName customerLastName,CustomerMiddleName customerMiddleName, CustomerAddress customerAddress) {
 		this.id = id;
@@ -59,6 +59,22 @@ public final class Customer extends AggregateRoot{
     public CustomerAddress customerAddress() {
         return customerAddress;
     }
+    public void updatePhone(CustomerPhone customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+    public void updateFirstName(CustomerFirstName customerFirstName) {
+        this.customerFirstName = customerFirstName;
+    }
+    public void updateLastName(CustomerLastName customerLastName) {
+        this.customerLastName = customerLastName;
+    }   
+    public void updateMiddleName(CustomerMiddleName customerMiddleName) {
+        this.customerMiddleName = customerMiddleName;
+    }
+    public void updateAddress(CustomerAddress customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
