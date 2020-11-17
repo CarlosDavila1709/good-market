@@ -13,4 +13,6 @@ public interface GroceryRepository {
 	
 	List<Grocery> matching(Criteria criteria);
 	
+    List<Grocery> searchAll();
+	
 }

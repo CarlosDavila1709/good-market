@@ -29,9 +29,12 @@ public final class GrocerysGetController extends ApiController {
 	public List<HashMap<String, String>> index(@RequestParam HashMap<String, Serializable> params)
 			throws QueryHandlerExecutionError {
 		GrocerysResponse grocerys = ask(new SearchGrocerysByCriteriaQuery(parseFilters(params),
-				Optional.ofNullable((String) params.get("order_by")), Optional.ofNullable((String) params.get("order")),
-				Optional.ofNullable((Integer) params.get("limit")),
-				Optional.ofNullable((Integer) params.get("offset"))));
+				Optional.ofNullable((String) params.get("order_by")), 
+				Optional.ofNullable((String) params.get("order")),
+                Optional.ofNullable(params.get("limit") !=null ?Integer.parseInt((String) params.get("limit")): null),
+                Optional.ofNullable(params.get("offset") !=null ?Integer.parseInt((String) params.get("offset")): null)
+                )
+            );
 
 		return grocerys.grocerys().stream().map(response -> new HashMap<String, String>() {
 			{

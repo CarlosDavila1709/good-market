@@ -31,8 +31,16 @@ public abstract class HibernateRepository<T> {
 
     protected List<T> byCriteria(Criteria criteria) {
         CriteriaQuery<T> hibernateCriteria = criteriaConverter.convert(criteria, aggregateClass);
-
-        return sessionFactory.getCurrentSession().createQuery(hibernateCriteria).getResultList();
+        
+        int limit = criteria.limit().orElseGet(()->100);
+        int offset = criteria.offset().orElseGet(()->0);
+        
+        return sessionFactory.getCurrentSession().createQuery(hibernateCriteria)
+		        .setFirstResult(limit * offset)
+        		.setMaxResults(limit)
+		        .getResultList();
+        
+        //return sessionFactory.getCurrentSession().createQuery(hibernateCriteria).getResultList();
     }
 
     protected List<T> all() {

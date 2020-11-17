@@ -36,4 +36,10 @@ public class PgSqlGroceryRepository extends HibernateRepository<Grocery> impleme
     public List<Grocery> matching(Criteria criteria) {
         return byCriteria(criteria);
     }
+
+	@Override
+	public List<Grocery> searchAll() {
+		
+		return all();
+	}
 }
