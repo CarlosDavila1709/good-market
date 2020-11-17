@@ -33,7 +33,11 @@ public class PgSqlShoppingCartItemRepository extends HibernateRepository<CartIte
 
     	persist(cartItem);
     }
+    @Override
+    public void delete(CartItem cartItem) {
 
+    	remover(cartItem);
+    }
     @Override
     public List<CartItem> matching(Criteria criteria) {
         return byCriteria(criteria);

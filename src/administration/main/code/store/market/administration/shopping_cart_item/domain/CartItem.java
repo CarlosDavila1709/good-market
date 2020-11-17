@@ -119,6 +119,10 @@ public final class CartItem extends AggregateRoot {
 	public BackofficeGroceryId groceryId() {
 		return groceryId;
 	}
+	
+	public void updateQuantity(CartItemQuantity quantity) {
+		this.quantity = quantity;
+	}
     @Override
     public boolean equals(Object o) {
         if (this == o) {

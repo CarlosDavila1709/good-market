@@ -9,6 +9,8 @@ public interface ItemCartRepository {
 
     void save(CartItem cartItem);
 
+    void delete(CartItem cartItem);
+    
     List<CartItem> matching(Criteria criteria);
 
 	Optional<CartItem> search(CartItemId cartItemId);
