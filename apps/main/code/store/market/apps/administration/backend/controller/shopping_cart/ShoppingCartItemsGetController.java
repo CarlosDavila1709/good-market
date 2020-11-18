@@ -40,7 +40,7 @@ public final class ShoppingCartItemsGetController extends ApiController{
 		params.put("filters[1][field]", "sessionId");
 		params.put("filters[1][operator]", "=");
 		params.put("filters[1][value]", sessionid);
-		
+		params.put("order_by", "productName");
 		CartItemsResponse items = ask(
 	            new SearchCartItemsByCriteriaQuery(
 	                    parseFilters(params),
