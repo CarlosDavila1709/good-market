@@ -7,6 +7,7 @@ import java.util.Objects;
 import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product_catalog.domain.ProductCatalogId;
 import store.market.shared.domain.AggregateRoot;
+import store.market.shared.domain.shopping_cart.DeleteProductToShoppingCartAggregateDomainEvent;
 import store.market.shared.domain.shopping_cart.ProductToShoppingCartAggregateDomainEvent;
 
 
@@ -103,13 +104,6 @@ public final class ShoppingCart extends AggregateRoot{
 	public void updateStatus(ShoppingCartStatus status) {
 		this.status = status;
 	}
-	public void addAmount(ShoppingCartAmountTotal amountTotal,ShoppingCartQuantity quantity) {
-		
-		Double amountTotalByQuantity = amountTotal.value() * quantity.value();
-		
-		this.amountTotal = this.amountTotal.increment(amountTotalByQuantity);
-
-	}
 
     public void addProduct(ProductCatalogId productId, ShoppingCartQuantity quantity) {
     	
@@ -123,9 +117,33 @@ public final class ShoppingCart extends AggregateRoot{
     	record(new ProductToShoppingCartAggregateDomainEvent(id.value(),sessionId.value(),productId.value(), quantity.value(), groceryId.value()));
     }
     
-	public void subtractAmount(ShoppingCartAmountTotal amountTotal) {
-		
-		this.amountTotal = this.amountTotal.subtract(amountTotal.value());
+    public void removeProduct(ProductCatalogId productId) {
+
+    	List<ProductCatalogId> operatedList = new ArrayList<>();
+    	existingProducts.stream()
+    	  .forEach(item -> {
+    		  if(item.equals(productId))
+    			  operatedList.add(item);
+    	});
+    	existingProducts.removeAll(operatedList);
+    	totalItems = totalItems.decrement(operatedList.size());
+
+    	record(new DeleteProductToShoppingCartAggregateDomainEvent(id.value(),sessionId.value(),productId.value()));
+    	
+    }
+	public void addAmount(ShoppingCartAmountTotal amountTotal,ShoppingCartQuantity quantity) {
+		Double amountTotalByQuantity = amountTotal.value() * quantity.value();
+		this.amountTotal = this.amountTotal.increment(amountTotalByQuantity);
+
+	}
+
+	public void subtractAmount(Double priceProduct,ProductCatalogId productId) {
+
+    	existingProducts.forEach(item->{ 
+    		if(item.equals(productId)) {
+    			this.amountTotal = this.amountTotal.subtract(priceProduct);
+    		}
+    	});
 	}
 	
     public boolean existsProduct(ProductCatalogId id) {

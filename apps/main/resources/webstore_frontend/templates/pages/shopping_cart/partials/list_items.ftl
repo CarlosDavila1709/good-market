@@ -12,6 +12,9 @@
             Cantidad
         </th>
         <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            Medida
+        </th>
+        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
             Total
         </th>
     </tr>
@@ -58,6 +61,7 @@ function addBodyCartItemsList(url) {
                 itemRow.appendChild(tableCellFor(item.product_name));
                 itemRow.appendChild(tableCellFor("S/ "+item.price));
                 itemRow.appendChild(tableCellFor(item.quantity));
+                itemRow.appendChild(tableCellFor(item.unit_measure_name));
                 itemRow.appendChild(tableCellFor("S/ "+ item.amount_total));
 
                 tableBody.appendChild(itemRow);

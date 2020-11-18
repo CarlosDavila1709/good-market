@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import store.market.administration.shopping_cart_item.application.update_quantity.UpdateItemCommand;
+import store.market.administration.shopping_cart.application.update_quantity_product.UpdateProductQuantityCommand;
 
 import store.market.shared.domain.DomainError;
 import store.market.shared.domain.bus.command.CommandBus;
@@ -26,12 +26,13 @@ public class ShoppingCartUpdateItemQuantityPutWebController extends ApiControlle
 		 super(queryBus, commandBus);
 	}
 	
-    @PutMapping(value = "/shopping-cart/item/{id}")
-    public ResponseEntity<String> index(@PathVariable String id, @RequestBody RequestUpdate request
+    @PutMapping(value = "/shopping-cart/item")
+    public ResponseEntity<String> index(@RequestBody RequestUpdate request
     ) throws CommandHandlerExecutionError {
     	
-    	dispatch(new UpdateItemCommand(
-    			id,
+    	dispatch(new UpdateProductQuantityCommand(
+    			request.sessionId(),
+    			request.productId(),
     			request.quantity()
             ));
 
@@ -46,13 +47,26 @@ public class ShoppingCartUpdateItemQuantityPutWebController extends ApiControlle
 
 final class RequestUpdate {
     
-	private int quantity;
+	private String sessionId;
+	private String productId;
+	private Integer quantity;
     
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
-    public int quantity() {
+    public String sessionId() {
+    	return sessionId;
+    }
+    public String productId() {
+    	return productId;
+    }
+    public Integer quantity() {
     	return quantity;
     }
 }

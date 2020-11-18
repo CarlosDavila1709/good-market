@@ -1,8 +1,9 @@
 package store.market.administration.shopping_cart_item.application.add_item;
 
 import store.market.administration.grocery.domain.BackofficeGroceryId;
-import store.market.administration.product.application.ProductResponse;
-import store.market.administration.product.application.find.FindProductQuery;
+
+import store.market.administration.product_catalog.application.ProductCatalogResponse;
+import store.market.administration.product_catalog.application.find.FindProductCatalogQuery;
 import store.market.administration.shopping_cart.domain.ShoppingCartId;
 import store.market.administration.shopping_cart_item.domain.ShoppingCartSessionId;
 import store.market.administration.shopping_cart_item.domain.*;
@@ -27,7 +28,7 @@ public final class AddItemsOnCart {
 	
 	public void add(ShoppingCartId cartId ,ShoppingCartSessionId sessionId, CartItemProductId productId, CartItemQuantity quantity,BackofficeGroceryId groceryId) {
 		
-		ProductResponse product = queryBus.ask(new FindProductQuery(productId.value()));
+		ProductCatalogResponse product = queryBus.ask(new FindProductCatalogQuery(productId.value()));
 		
 		CartItem cartItem = repository.search(sessionId, productId)
 				.orElseGet(
@@ -38,7 +39,8 @@ public final class AddItemsOnCart {
 								productId, 
 								new CartItemProductPrice(product.price()), 
 								new CartItemProductName(product.name()),
-								groceryId)
+								groceryId,
+								new CartItemUnitMeasureName(product.unitMeasureName()))
 						);
     	
 		cartItem.increment(new CartItemQuantity(quantity.value()));

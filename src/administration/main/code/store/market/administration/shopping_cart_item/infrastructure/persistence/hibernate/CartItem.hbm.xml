@@ -32,5 +32,8 @@
         <component name="quantity" class="store.market.administration.shopping_cart_item.domain.CartItemQuantity" access="field">
             <property name="value" column="quantity" type="integer" access="field" />
         </component>
+        <component name="unitMeasureName" class="store.market.administration.shopping_cart_item.domain.CartItemUnitMeasureName" access="field">
+            <property name="value" column="unit_measure_name" type="string" access="field" />
+        </component>
     </class>
 </hibernate-mapping>

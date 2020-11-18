@@ -19,4 +19,7 @@ public final class ShoppingCartCounterItems extends IntValueObject{
     public ShoppingCartCounterItems increment(int value) {
         return new ShoppingCartCounterItems(value() + value);
     }
+    public ShoppingCartCounterItems decrement(int value) {
+        return new ShoppingCartCounterItems(value() - value);
+    }
 }

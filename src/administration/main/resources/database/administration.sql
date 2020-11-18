@@ -58,15 +58,16 @@ CREATE TABLE  IF NOT EXISTS cart_items (
     product_price DECIMAL(13, 2) NOT NULL,
     amount_total DECIMAL(13, 2) NOT NULL,
     quantity INT NOT NULL,
+    unit_measure_name VARCHAR(255),
     PRIMARY KEY (id)
 ) ;
 CREATE TABLE  IF NOT EXISTS customers (
     id CHAR(36) NOT NULL,
     customer_phone VARCHAR(255) NOT NULL,
     customer_first_name VARCHAR(255) NOT NULL,
-    customer_last_name VARCHAR(255) NOT NULL,
-    customer_middle_name VARCHAR(255) NOT NULL,
-    customer_address VARCHAR(255) NOT NULL,
+    customer_last_name VARCHAR(255),
+    customer_middle_name VARCHAR(255),
+    customer_address VARCHAR(255),
     PRIMARY KEY (id)
 ) ;
 CREATE TABLE  IF NOT EXISTS orders (

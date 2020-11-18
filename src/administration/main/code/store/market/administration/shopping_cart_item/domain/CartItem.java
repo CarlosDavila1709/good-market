@@ -21,6 +21,8 @@ public final class CartItem extends AggregateRoot {
 	
 	private final CartItemProductName productName;
 	
+	private final CartItemUnitMeasureName unitMeasureName;
+	
 	private CartItemAmountTotal amountTotal;
 	
 	private CartItemQuantity quantity;
@@ -35,7 +37,8 @@ public final class CartItem extends AggregateRoot {
 			CartItemProductPrice productPrice,
 			CartItemProductName productName,
 			CartItemQuantity quantity,
-			BackofficeGroceryId groceryId) {
+			BackofficeGroceryId groceryId,
+			CartItemUnitMeasureName unitMeasureName) {
 
 		this.id = id;
 		this.shoppingCartId = shoppingCartId;
@@ -46,6 +49,7 @@ public final class CartItem extends AggregateRoot {
 		this.amountTotal = new CartItemAmountTotal(0.00);
 		this.quantity = quantity;
 		this.groceryId = groceryId;
+		this.unitMeasureName = unitMeasureName;
 	}
 	
 	
@@ -59,6 +63,7 @@ public final class CartItem extends AggregateRoot {
 		this.amountTotal = null;
 		this.quantity = null;
 		this.groceryId = null;
+		this.unitMeasureName = null;
 	}
 	
 	public static CartItem initialize(
@@ -68,9 +73,10 @@ public final class CartItem extends AggregateRoot {
 			CartItemProductId productId,
 			CartItemProductPrice productPrice,
 			CartItemProductName productName,
-			BackofficeGroceryId groceryId) {
+			BackofficeGroceryId groceryId,
+			CartItemUnitMeasureName unitMeasureName) {
 		
-		CartItem cartItem = new  CartItem(id,shoppingCartId,sessionId,productId,productPrice,productName,CartItemQuantity.initialize(),groceryId);
+		CartItem cartItem = new  CartItem(id,shoppingCartId,sessionId,productId,productPrice,productName,CartItemQuantity.initialize(),groceryId,unitMeasureName);
 
 		return cartItem;
 		
@@ -119,10 +125,13 @@ public final class CartItem extends AggregateRoot {
 	public BackofficeGroceryId groceryId() {
 		return groceryId;
 	}
-	
+	public CartItemUnitMeasureName unitMeasureName() {
+		return unitMeasureName;
+	}
 	public void updateQuantity(CartItemQuantity quantity) {
 		this.quantity = quantity;
 	}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -140,7 +149,7 @@ public final class CartItem extends AggregateRoot {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,shoppingCartId,sessionId,productId, productPrice,productName,amountTotal,quantity,groceryId);
+        return Objects.hash(id,shoppingCartId,sessionId,productId, productPrice,productName,amountTotal,quantity,groceryId,unitMeasureName);
     }
 
 }

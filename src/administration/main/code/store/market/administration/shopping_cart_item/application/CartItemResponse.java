@@ -19,7 +19,9 @@ public final class CartItemResponse implements Response{
 	
 	private final Integer quantity;
 	
-	public CartItemResponse(String id,String sessionId,String productId,Double productPrice,String productName,Double amountTotal,Integer quantity) {
+	private final String unitMeasureName;
+	
+	public CartItemResponse(String id,String sessionId,String productId,Double productPrice,String productName,Double amountTotal,Integer quantity,String unitMeasureName) {
 		
 		this.id = id;
 		this.sessionId = sessionId;
@@ -28,6 +30,7 @@ public final class CartItemResponse implements Response{
 		this.productName = productName;
 		this.amountTotal = amountTotal;
 		this.quantity = quantity;
+		this.unitMeasureName = unitMeasureName;
 	}
     public static CartItemResponse fromAggregate(CartItem CartItem) {
         return new CartItemResponse(
@@ -37,7 +40,8 @@ public final class CartItemResponse implements Response{
         		CartItem.productPrice().value(),
         		CartItem.productName().value(),
         		CartItem.amountTotal().value(),
-        		CartItem.quantity().value());
+        		CartItem.quantity().value(),
+        		CartItem.unitMeasureName().value());
     }
     public String id() {
     	return id;
@@ -59,5 +63,8 @@ public final class CartItemResponse implements Response{
     }
     public Integer quantity() {
     	return quantity;
+    }
+    public String unitMeasureName() {
+    	return unitMeasureName;
     }
 }
