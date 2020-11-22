@@ -77,6 +77,7 @@ CREATE TABLE  IF NOT EXISTS orders (
     amount_total DECIMAL(13, 2) NOT NULL,
     total_items INT NOT NULL,
     status VARCHAR(255) NOT NULL,
+    description_status VARCHAR(255) NOT NULL,
     existing_products VARCHAR(10000000),
     date_creation VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)

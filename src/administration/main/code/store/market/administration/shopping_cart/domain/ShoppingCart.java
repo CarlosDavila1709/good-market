@@ -7,9 +7,7 @@ import java.util.Objects;
 import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product_catalog.domain.ProductCatalogId;
 import store.market.shared.domain.AggregateRoot;
-import store.market.shared.domain.shopping_cart.DeleteProductToShoppingCartAggregateDomainEvent;
 import store.market.shared.domain.shopping_cart.ProductToShoppingCartAggregateDomainEvent;
-
 
 public final class ShoppingCart extends AggregateRoot{
 	
@@ -116,7 +114,6 @@ public final class ShoppingCart extends AggregateRoot{
 
     	record(new ProductToShoppingCartAggregateDomainEvent(id.value(),sessionId.value(),productId.value(), quantity.value(), groceryId.value()));
     }
-    
     public void removeProduct(ProductCatalogId productId) {
 
     	List<ProductCatalogId> operatedList = new ArrayList<>();
@@ -128,15 +125,24 @@ public final class ShoppingCart extends AggregateRoot{
     	existingProducts.removeAll(operatedList);
     	totalItems = totalItems.decrement(operatedList.size());
 
-    	record(new DeleteProductToShoppingCartAggregateDomainEvent(id.value(),sessionId.value(),productId.value()));
-    	
     }
 	public void addAmount(ShoppingCartAmountTotal amountTotal,ShoppingCartQuantity quantity) {
 		Double amountTotalByQuantity = amountTotal.value() * quantity.value();
 		this.amountTotal = this.amountTotal.increment(amountTotalByQuantity);
 
 	}
-
+	public void inizializeAmount() {		
+		this.amountTotal = ShoppingCartAmountTotal.initialize();
+	}
+	public void inizializeTotalItems() {		
+		this.totalItems = ShoppingCartCounterItems.initialize();
+	}
+	public void increaseAmount(ShoppingCartAmountTotal amountTotal) {		
+		this.amountTotal = this.amountTotal.increment(amountTotal.value());
+	}
+	public void increaseQuantityItems(ShoppingCartQuantity quantity) {
+		this.totalItems = this.totalItems.increment(quantity.value());
+	}
 	public void subtractAmount(Double priceProduct,ProductCatalogId productId) {
 
     	existingProducts.forEach(item->{ 
@@ -149,7 +155,7 @@ public final class ShoppingCart extends AggregateRoot{
     public boolean existsProduct(ProductCatalogId id) {
         return existingProducts.contains(id);
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

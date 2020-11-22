@@ -6,20 +6,19 @@ import store.market.shared.domain.Service;
 import store.market.shared.domain.bus.command.CommandHandler;
 
 @Service
-public final class UpdateItemCommandHandler implements CommandHandler<UpdateItemCommand>{
-
+public final class UpdateQuantityItemCommandHandler implements CommandHandler<UpdateQuantityItemCommand>{
 
 	private ItemQuantityUpdater updater;
 	
-	public UpdateItemCommandHandler(ItemQuantityUpdater updater) {
+	public UpdateQuantityItemCommandHandler(ItemQuantityUpdater updater) {
 		
 		this.updater = updater;
 	}
 	
 	@Override
-	public void handle(UpdateItemCommand command) {
+	public void handle(UpdateQuantityItemCommand command) {
 		 
-		CartItemId 		 id 	  = new CartItemId(command.id());
+		CartItemId 		 id 	  = new CartItemId(command.id());		
 		CartItemQuantity quantity = new CartItemQuantity(command.quantity());
 		
 		updater.update(id, quantity);

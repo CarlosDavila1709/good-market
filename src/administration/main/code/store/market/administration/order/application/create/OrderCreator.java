@@ -16,6 +16,8 @@ import store.market.administration.order.domain.OrderId;
 import store.market.administration.order.domain.OrderRepository;
 import store.market.administration.order.domain.OrderStatus;
 import store.market.administration.order.domain.StatusType;
+import store.market.administration.order_status.application.StatusOrderResponse;
+import store.market.administration.order_status.application.find.FindOrderStatusQuery;
 import store.market.administration.product_catalog.domain.ProductCatalogId;
 import store.market.administration.shopping_cart.application.ShoppingCartResponse;
 import store.market.administration.shopping_cart.application.search_by_session_active.SearchShoppingCartBySessionQuery;
@@ -53,12 +55,15 @@ public final class OrderCreator {
 			throw new SessionNotExistNotInitialized();
 		}
 
+		StatusOrderResponse status = queryBus.ask(new FindOrderStatusQuery(StatusType.SENT.codigo()));
+		
 		Order order = Order.create(id,
-				new OrderStatus(StatusType.ADMITTED.codigo()), 
+				new OrderStatus(status.codigo()), 
 				customer,
 				shopping,
 				new ArrayList<>(),
-				new OrderDateCreation(Utils.dateToString(LocalDateTime.now())));
+				new OrderDateCreation(Utils.dateToString(LocalDateTime.now())),
+				status.description());
 		
 		shopping.existingProducts().forEach(
 				productId -> order.incrementProduct(new ProductCatalogId(productId))

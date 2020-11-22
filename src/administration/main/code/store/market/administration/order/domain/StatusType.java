@@ -2,7 +2,7 @@ package store.market.administration.order.domain;
 
 public enum StatusType {
 
-	ADMITTED("admitted"), TRANSIT("transit"), DELIVERED("delivered");
+	SENT("sent"),ADMITTED("admitted"), TRANSIT("transit"), DELIVERED("delivered");
 	
 	private String codigo;
 	
@@ -15,6 +15,8 @@ public enum StatusType {
 	}
 	public static StatusType fromShortCodigo(String shortCodigo) {
         switch (shortCodigo) {
+        case "sent":
+        	return StatusType.SENT;
         case "admitted":
             return StatusType.ADMITTED;
         case "transit":

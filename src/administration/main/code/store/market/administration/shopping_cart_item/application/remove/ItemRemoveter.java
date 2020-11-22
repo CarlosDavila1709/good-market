@@ -3,31 +3,27 @@ package store.market.administration.shopping_cart_item.application.remove;
 import store.market.administration.shopping_cart_item.domain.CartItem;
 import store.market.administration.shopping_cart_item.domain.CartItemId;
 import store.market.administration.shopping_cart_item.domain.CartItemNotExist;
-import store.market.administration.shopping_cart_item.domain.CartItemProductId;
 import store.market.administration.shopping_cart_item.domain.ItemCartRepository;
-import store.market.administration.shopping_cart_item.domain.ShoppingCartSessionId;
 import store.market.shared.domain.Service;
+import store.market.shared.domain.bus.event.EventBus;
 
 @Service
 public final class ItemRemoveter {
 
 	private ItemCartRepository repository;
+    private final EventBus         eventBus;
 	
-	public ItemRemoveter(ItemCartRepository repository) {
+	public ItemRemoveter(ItemCartRepository repository,EventBus         eventBus) {
 		
 		this.repository = repository;
+		this.eventBus   = eventBus;
 	}
 	
 	public void remover(CartItemId id) {
 		
 		CartItem cartItem = repository.search(id).orElseThrow(() -> { throw new CartItemNotExist(id); });
-		
+		cartItem.prepareElimination();
 		repository.delete(cartItem);
-	}
-	public void removerv2(ShoppingCartSessionId sessionId,CartItemProductId productId) {
-		
-		CartItem cartItem = repository.search(sessionId,productId).orElseGet(() -> null);
-		if(cartItem!=null)
-			repository.delete(cartItem);
+		eventBus.publish(cartItem.pullDomainEvents());
 	}
 }

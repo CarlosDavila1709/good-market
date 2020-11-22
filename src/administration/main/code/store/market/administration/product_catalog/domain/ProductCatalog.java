@@ -14,7 +14,7 @@ public final class ProductCatalog {
     private final String unitMeasureName;
     private final String groceryId;
     private final String name;
-    private final Double price;
+    private Double price;
     
     public ProductCatalog() {
         this.id = null;
@@ -79,7 +79,9 @@ public final class ProductCatalog {
     public Double price() {
         return price;
     }
-
+    public void updatePrice(Double price) {
+        this.price = price;
+    }
     public HashMap<String, Serializable> toPrimitives() {
         return new HashMap<String, Serializable>() {{
             put("id", id.value());

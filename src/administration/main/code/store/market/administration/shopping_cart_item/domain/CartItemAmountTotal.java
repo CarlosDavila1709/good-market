@@ -18,4 +18,12 @@ public final class CartItemAmountTotal extends DoubleValueObject{
     	return new CartItemAmountTotal(this.value() + value);
     	
     }
+    public CartItemAmountTotal decrement(Double value) {
+        
+    	return new CartItemAmountTotal(this.value() - value);
+    	
+    }
+    public static CartItemAmountTotal initialize() {
+        return new CartItemAmountTotal(0.00);
+    }
 }

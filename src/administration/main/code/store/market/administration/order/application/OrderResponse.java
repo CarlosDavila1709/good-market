@@ -11,6 +11,8 @@ public final class OrderResponse implements Response{
 	private Double amountTotal;
 	private Integer totalItems;
 	private String dateCreation;
+	private String codigoStatus;
+	private String descriptionStatus;
 
 	public OrderResponse(String id,String groceryId,String customerId,Double amountTotal,Integer totalItems,String dateCreation) {
 		this.id = id;

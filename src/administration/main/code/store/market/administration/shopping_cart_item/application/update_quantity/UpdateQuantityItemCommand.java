@@ -2,13 +2,13 @@ package store.market.administration.shopping_cart_item.application.update_quanti
 
 import store.market.shared.domain.bus.command.Command;
 
-public final class UpdateItemCommand implements Command{
+public final class UpdateQuantityItemCommand implements Command{
 
 	private final String id;
 	
 	private final Integer quantity;
 	
-	public UpdateItemCommand(String id, Integer quantity) {
+	public UpdateQuantityItemCommand(String id, Integer quantity) {
 		
 		this.id = id;
 		this.quantity = quantity;

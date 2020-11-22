@@ -1,4 +1,4 @@
-package store.market.administration.shopping_cart.application.remove_product_to_cart;
+package store.market.administration.shopping_cart.application.update_quantity_product;
 
 import store.market.administration.product_catalog.domain.ProductCatalogId;
 import store.market.administration.shopping_cart.domain.ShoppingCart;
@@ -13,24 +13,22 @@ import store.market.shared.domain.Service;
 import store.market.shared.domain.bus.query.QueryBus;
 
 @Service
-public final class RemoveProductShoppingCart {
+public class UpdateAmountAndTotalsUpdater {
 
+	private final QueryBus 		   queryBus;
 	private ShoppingCartRepository repository;
-	private final QueryBus queryBus;
-    
-	public RemoveProductShoppingCart(ShoppingCartRepository repository,QueryBus queryBus) {
+	
+	public UpdateAmountAndTotalsUpdater(ShoppingCartRepository repository,QueryBus queryBus) {
 		
 		this.repository = repository;
 		this.queryBus = queryBus;
 	}
 	
-	public void remove(ShoppingCartId shoppingCartId,ProductCatalogId productId,String itemId ) {
+	public void update(ShoppingCartId id,ProductCatalogId productId, ShoppingCartQuantity quantity) {
 		
-		ShoppingCart cart = repository.search(shoppingCartId).orElseThrow(()->{ throw new ShoppingCartNotExist(shoppingCartId);});
+		ShoppingCart cart = repository.search(id).orElseThrow(()->{ throw new ShoppingCartNotExist(id);});
 		
-		CartItemsResponse items = queryBus.ask(new SearchCartItemByCartQuery(shoppingCartId.value()));
-
-		cart.removeProduct(productId);
+		CartItemsResponse items = queryBus.ask(new SearchCartItemByCartQuery(id.value()));
 		
 		cart.inizializeAmount();
 		cart.inizializeTotalItems();
@@ -39,9 +37,7 @@ public final class RemoveProductShoppingCart {
 			cart.increaseQuantityItems(new ShoppingCartQuantity(item.quantity()));
 		}); 
 		
-		//cart.subtractAmount(product.price(),productId);
-
 		repository.save(cart);
-
+		
 	}
 }

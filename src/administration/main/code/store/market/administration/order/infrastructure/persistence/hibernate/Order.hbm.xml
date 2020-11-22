@@ -23,6 +23,7 @@
         <component name="status" class="store.market.administration.order.domain.OrderStatus" access="field">
             <property name="value" column="status" type="string" access="field" />
         </component>
+        <property name="descriptionStatus" column="description_status" type="string" access="field" />
         <component name="dateCreation" class="store.market.administration.order.domain.OrderDateCreation" access="field">
             <property name="value" column="date_creation" type="string" access="field" />
         </component>

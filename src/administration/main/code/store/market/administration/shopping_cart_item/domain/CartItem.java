@@ -5,6 +5,8 @@ import java.util.Objects;
 import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.shopping_cart.domain.ShoppingCartId;
 import store.market.shared.domain.AggregateRoot;
+import store.market.shared.domain.shopping_cart_item.DeleteItemToShoppingCartAggregateDomainEvent;
+import store.market.shared.domain.shopping_cart_item.UpdateQuantityItemToShoppingCartAggregateDomainEvent;
 
 
 public final class CartItem extends AggregateRoot {
@@ -85,6 +87,11 @@ public final class CartItem extends AggregateRoot {
     	
     	this.quantity = this.quantity.increment(quantity);
        
+    }
+    public void decrement(CartItemQuantity quantity) {
+    	
+    	this.quantity = this.quantity.increment(quantity);
+       
     }	
     public void addAmount(CartItemProductPrice productPrice,CartItemQuantity quantity) {
 		
@@ -93,6 +100,19 @@ public final class CartItem extends AggregateRoot {
 		this.amountTotal = this.amountTotal.increment(amountTotalByQuantity);
 
 	}
+    public void subtractAmount(CartItemProductPrice productPrice,CartItemQuantity quantity) {
+
+		Double amountTotalByQuantity = productPrice.value() * quantity.value();
+		
+		this.amountTotal = this.amountTotal.decrement(amountTotalByQuantity);
+
+	}
+    public void updateAmountTotal(CartItemProductPrice productPrice,CartItemQuantity quantity) {
+    	CartItemAmountTotal amountTotal = CartItemAmountTotal.initialize();
+		Double amountTotalByQuantity = productPrice.value() * quantity.value();
+		this.amountTotal = amountTotal.increment(amountTotalByQuantity);
+    }
+    
 	public CartItemId id() {
 		return id;
 	}
@@ -128,10 +148,15 @@ public final class CartItem extends AggregateRoot {
 	public CartItemUnitMeasureName unitMeasureName() {
 		return unitMeasureName;
 	}
-	public void updateQuantity(CartItemQuantity quantity) {
+	public void updateQuantity(ShoppingCartId cartId, CartItemProductId productId, CartItemQuantity quantity) {
 		this.quantity = quantity;
+		this.record(new UpdateQuantityItemToShoppingCartAggregateDomainEvent(id.value(), cartId.value(),  productId.value(),  quantity.value()));
 	}
 
+	public void prepareElimination() {
+		this.record(new DeleteItemToShoppingCartAggregateDomainEvent(id.value(),shoppingCartId.value(),productId.value()));
+	}
+	
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -22,4 +22,8 @@ public class CartItemQuantity extends IntValueObject{
     public CartItemQuantity increment(CartItemQuantity cartItemQuantity) {
         return new CartItemQuantity(value() + cartItemQuantity.value());
     }
+    
+    public CartItemQuantity decrement(CartItemQuantity cartItemQuantity) {
+        return new CartItemQuantity(value() - cartItemQuantity.value());
+    }
 }
