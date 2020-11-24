@@ -11,7 +11,7 @@ public final class Categorie extends AggregateRoot {
 	
 	private final BackofficeGroceryId groceryId;
 	
-	private final CategorieName name;
+	private CategorieName name;
 
 	public Categorie(CategorieId id, CategorieName name,BackofficeGroceryId groceryId) {
 		this.id = id;
@@ -44,6 +44,9 @@ public final class Categorie extends AggregateRoot {
 	}
 	public BackofficeGroceryId groceryId() {
 		return groceryId;
+	}
+	public void updateName(CategorieName name) {
+		this.name = name ;
 	}
     @Override
     public boolean equals(Object o) {

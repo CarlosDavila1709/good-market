@@ -12,9 +12,9 @@ public final class UnitMeasure  extends AggregateRoot {
 	
 	private final BackofficeGroceryId groceryId;
 	
-	private final UnitMeasureName name;
+	private  UnitMeasureName name;
 	
-	private final UnitMeasurePrefix prefix;
+	private  UnitMeasurePrefix prefix;
 	
 	public UnitMeasure(UnitMeasureId id, BackofficeGroceryId groceryId,UnitMeasureName name,UnitMeasurePrefix prefix) {
 	
@@ -41,6 +41,9 @@ public final class UnitMeasure  extends AggregateRoot {
 		
 	}
 	
+	public BackofficeGroceryId groceryId() {
+		return groceryId;
+	}
 	public UnitMeasureId id() {
 		
 		return id;
@@ -50,6 +53,12 @@ public final class UnitMeasure  extends AggregateRoot {
 	}
 	public UnitMeasurePrefix prefix() {
 		return prefix;
+	}
+	public void updateName(UnitMeasureName name) {
+		this.name = name;
+	}
+	public void updatePrefix(UnitMeasurePrefix prefix) {
+		this.prefix = prefix;
 	}
 	
     @Override

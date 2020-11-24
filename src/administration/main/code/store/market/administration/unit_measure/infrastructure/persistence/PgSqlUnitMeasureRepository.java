@@ -46,4 +46,9 @@ public final class PgSqlUnitMeasureRepository extends HibernateRepository<UnitMe
 		return byId(id);
 	}
 
+	@Override
+	public void delete(UnitMeasure unitMeasure) {
+		remover(unitMeasure);
+	}
+
 }

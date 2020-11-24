@@ -9,6 +9,8 @@ public interface UnitMeasureRepository {
 
     void save(UnitMeasure unitMeasure);
 
+    void delete(UnitMeasure unitMeasure);
+    
     List<UnitMeasure> searchAll();
 
     List<UnitMeasure> matching(Criteria criteria);

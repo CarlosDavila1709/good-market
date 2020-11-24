@@ -14,4 +14,6 @@ public interface CategorieRepository {
     List<Categorie> matching(Criteria criteria);
     
     Optional<Categorie> search(CategorieId id);
+    
+    void delete(Categorie categorie);
 }

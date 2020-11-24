@@ -42,4 +42,10 @@ public final class PgSqlCategorieRepository extends HibernateRepository<Categori
 		
 		return byId(id);
 	}
+	
+    @Override
+    public void delete(Categorie categorie) {
+
+    	remover(categorie);
+    }
 }
