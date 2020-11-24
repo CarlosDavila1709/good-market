@@ -20,7 +20,7 @@ public final class ProductPriceUpdater {
 	}
 	public void update(ProductId id, ProductPrice newPrice) {
 		
-		Product product = repository.search(id).orElseThrow(()-> {throw new ProductNotExist(id);});
+		Product product = repository.search(id).orElseThrow(()->  new ProductNotExist(id));
 		
 		product.updatePrice(newPrice);
 		

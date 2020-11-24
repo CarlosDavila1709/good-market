@@ -19,7 +19,7 @@ public final class CategorieUpdater {
 	
 	public void update (CategorieId id, CategorieName name) {
 		
-		Categorie categorie = repository.search(id).orElseThrow(()->{throw new CategorieNotExist(id);});
+		Categorie categorie = repository.search(id).orElseThrow(()-> new CategorieNotExist(id));
 		categorie.updateName(name);
 		repository.save(categorie);
 	}

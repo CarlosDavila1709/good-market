@@ -24,7 +24,7 @@ public final class CustomerUpdater  {
     
     public void update(CustomerId id,CustomerPhone customerPhone,CustomerFirstName customerFirstName, CustomerLastName customerLastName,CustomerMiddleName customerMiddleName, CustomerAddress customerAddress) {
     	
-    	Customer cust = repository.search(id).orElseThrow(() -> { throw new CustomerNotExist(id); });
+    	Customer cust = repository.search(id).orElseThrow(() ->new CustomerNotExist(id));
 
     	cust.updateAddress(customerAddress);
     	cust.updateFirstName(customerFirstName);

@@ -18,7 +18,7 @@ public final class UnitMeasureDeleter {
 	
 	public void delete(UnitMeasureId id) {
 		
-		UnitMeasure unitMeasure = repository.search(id).orElseThrow(()-> {throw new UnitMeasureNotExist(id);});
+		UnitMeasure unitMeasure = repository.search(id).orElseThrow(()-> new UnitMeasureNotExist(id));
 		
 		repository.delete(unitMeasure);
 	}

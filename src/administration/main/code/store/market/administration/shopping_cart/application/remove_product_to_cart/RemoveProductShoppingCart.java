@@ -26,7 +26,7 @@ public final class RemoveProductShoppingCart {
 	
 	public void remove(ShoppingCartId shoppingCartId,ProductCatalogId productId,String itemId ) {
 		
-		ShoppingCart cart = repository.search(shoppingCartId).orElseThrow(()->{ throw new ShoppingCartNotExist(shoppingCartId);});
+		ShoppingCart cart = repository.search(shoppingCartId).orElseThrow(()-> new ShoppingCartNotExist(shoppingCartId));
 		
 		CartItemsResponse items = queryBus.ask(new SearchCartItemByCartQuery(shoppingCartId.value()));
 

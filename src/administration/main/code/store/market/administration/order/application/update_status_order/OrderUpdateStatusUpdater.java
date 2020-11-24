@@ -24,7 +24,7 @@ public final class OrderUpdateStatusUpdater {
 	}
 	
 	public void update(OrderId id, OrderStatus status) {
-		Order orde = repository.search(id).orElseThrow(()->{ throw new OrderNotExist(id);});
+		Order orde = repository.search(id).orElseThrow(()-> new OrderNotExist(id));
 		StatusOrderResponse statusOrder = queryBus.ask(new FindOrderStatusQuery(status.value()));
 		
 		orde.updateStatus(status);

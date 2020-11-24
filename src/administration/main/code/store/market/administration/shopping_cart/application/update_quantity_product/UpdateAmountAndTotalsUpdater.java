@@ -26,7 +26,7 @@ public class UpdateAmountAndTotalsUpdater {
 	
 	public void update(ShoppingCartId id,ProductCatalogId productId, ShoppingCartQuantity quantity) {
 		
-		ShoppingCart cart = repository.search(id).orElseThrow(()->{ throw new ShoppingCartNotExist(id);});
+		ShoppingCart cart = repository.search(id).orElseThrow(()-> new ShoppingCartNotExist(id));
 		
 		CartItemsResponse items = queryBus.ask(new SearchCartItemByCartQuery(id.value()));
 		

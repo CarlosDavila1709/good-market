@@ -17,7 +17,7 @@ public final  class CategorieDeleter {
 	}
 	
 	public void delete(CategorieId id) {
-		Categorie categorie = repository.search(id).orElseThrow(()->{throw new CategorieNotExist(id);});
+		Categorie categorie = repository.search(id).orElseThrow(()-> new CategorieNotExist(id));
 		repository.delete(categorie);
 	}
 }

@@ -27,7 +27,7 @@ public final class ItemQuantityUpdater {
 	
 	public void update( CartItemId id,  CartItemQuantity quantity) {
 		
-		CartItem cartItem= repository.search(id).orElseThrow(() -> { throw new CartItemNotExist(id); });
+		CartItem cartItem= repository.search(id).orElseThrow(() -> new CartItemNotExist(id));
 		ProductCatalogResponse product = queryBus.ask(new FindProductCatalogQuery(cartItem.productId().value()));
 
 		cartItem.updateQuantity(cartItem.shoppingCartId(),cartItem.productId(),quantity);

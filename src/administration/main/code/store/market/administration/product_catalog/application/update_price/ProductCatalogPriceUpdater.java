@@ -18,7 +18,7 @@ public final class ProductCatalogPriceUpdater {
 	
 	public void update(ProductCatalogId id, Double newPrice) {
 		
-		ProductCatalog product = repository.search(id).orElseThrow(()->{ throw new ProductCatalogNotExist(id);});
+		ProductCatalog product = repository.search(id).orElseThrow(()-> new ProductCatalogNotExist(id));
 		
 		product.updatePrice(newPrice);
 		

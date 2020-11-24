@@ -20,7 +20,7 @@ public final class UnitMeasureUpdater {
 	}
 	
 	public void update(UnitMeasureId id, UnitMeasureName name,UnitMeasurePrefix prefix) {
-		UnitMeasure unitMeasure = repository.search(id).orElseThrow(()-> {throw new UnitMeasureNotExist(id);});
+		UnitMeasure unitMeasure = repository.search(id).orElseThrow(()-> new UnitMeasureNotExist(id));
 		
 		unitMeasure.updateName(name);
 		unitMeasure.updatePrefix(prefix);

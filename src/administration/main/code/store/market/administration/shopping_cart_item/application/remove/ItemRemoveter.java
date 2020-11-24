@@ -21,7 +21,7 @@ public final class ItemRemoveter {
 	
 	public void remover(CartItemId id) {
 		
-		CartItem cartItem = repository.search(id).orElseThrow(() -> { throw new CartItemNotExist(id); });
+		CartItem cartItem = repository.search(id).orElseThrow(() -> new CartItemNotExist(id));
 		cartItem.prepareElimination();
 		repository.delete(cartItem);
 		eventBus.publish(cartItem.pullDomainEvents());
