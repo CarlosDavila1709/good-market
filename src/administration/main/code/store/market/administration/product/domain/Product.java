@@ -5,6 +5,7 @@ import java.util.Objects;
 import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.shared.domain.AggregateRoot;
 import store.market.shared.domain.product.ProductCreatedDomainEvent;
+import store.market.shared.domain.product.ProductDeletedAggregateDomainEvent;
 import store.market.shared.domain.product.ProductUpdatedDomainEvent;
 
 public final class Product extends AggregateRoot{
@@ -81,7 +82,9 @@ public final class Product extends AggregateRoot{
         this.record(new ProductUpdatedDomainEvent(this.id.value(),price.value()));
         
     }
-    
+    public void prepareElimination() {
+    	this.record(new ProductDeletedAggregateDomainEvent(this.id.value(),this.name.value()));
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

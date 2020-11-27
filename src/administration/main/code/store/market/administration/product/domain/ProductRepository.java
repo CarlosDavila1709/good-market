@@ -14,4 +14,6 @@ public interface ProductRepository {
     List<Product> matching(Criteria criteria);
     
     Optional<Product> search(ProductId id);
+    
+    void delete(Product product);
 }

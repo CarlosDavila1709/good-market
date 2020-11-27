@@ -44,4 +44,9 @@ public class PgSqlProductCatalogRepository extends HibernateRepository<ProductCa
     public Optional<ProductCatalog> search(ProductCatalogId id) {
         return byId(id);
     }
+
+	@Override
+	public void delete(ProductCatalog product) {
+		remover(product);
+	}
 }

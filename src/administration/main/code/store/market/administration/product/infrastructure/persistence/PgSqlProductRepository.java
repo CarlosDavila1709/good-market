@@ -41,4 +41,10 @@ public class PgSqlProductRepository  extends HibernateRepository<Product> implem
     public Optional<Product> search(ProductId id) {
         return byId(id);
     }
+
+	@Override
+	public void delete(Product product) {
+		remover(product);
+		
+	}
 }
