@@ -143,6 +143,9 @@ public final class HibernateConfigurationFactory {
 		Resource productCatalog = resourceResolver.getResource("classpath:administration/hibernate/ProductCatalog.hbm.xml");
 		Resource shoppingCart = resourceResolver.getResource("classpath:administration/hibernate/ShoppingCart.hbm.xml");
 		Resource unitMeasure = resourceResolver.getResource("classpath:administration/hibernate/UnitMeasure.hbm.xml");
+		
+		Resource backoffice_grocery = resourceResolver.getResource("classpath:backoffice/hibernate/Grocery.hbm.xml");
+
 		listaBeans.add(categorie);
 		listaBeans.add(backofficeGrocery);
 		listaBeans.add(cartItem);
@@ -154,6 +157,7 @@ public final class HibernateConfigurationFactory {
 		listaBeans.add(productCatalog);
 		listaBeans.add(shoppingCart);
 		listaBeans.add(unitMeasure);
+		listaBeans.add(backoffice_grocery);
 		return listaBeans;
 	}
     /****FIN*****/

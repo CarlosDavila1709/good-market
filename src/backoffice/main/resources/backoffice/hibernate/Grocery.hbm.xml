@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="store.market.backoffice.grocery.domain.Grocery" table="grocerys">
+        <composite-id name="id" class="store.market.backoffice.grocery.domain.GroceryId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="nameCommercial" class="store.market.backoffice.grocery.domain.GroceryNameCommercial" access="field">
+            <property name="value" column="name_commercial" type="string" access="field" />
+        </component>
+
+        <component name="address" class="store.market.backoffice.grocery.domain.GroceryAddress" access="field">
+            <property name="value" column="address" type="string" access="field" />
+        </component>
+                <component name="active" class="store.market.backoffice.grocery.domain.GroceryActive" access="field">
+            <property name="value" column="active" type="string" access="field" />
+        </component>
+    </class>
+</hibernate-mapping>
