@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import store.market.administration.unit_measure.application.UnitMeasureResponse;
 import store.market.administration.unit_measure.application.create.CreateUnitMeasureCommand;
-
+import store.market.administration.unit_measure.application.find.FindUnitMeasureQuery;
+import store.market.administration.unit_measure.application.update.UpdateUnitMeasureCommand;
 import store.market.shared.domain.DomainError;
 import store.market.shared.domain.bus.command.CommandBus;
 import store.market.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -31,12 +33,25 @@ public class UnitMeasurePutController extends ApiController{
     public ResponseEntity<String> index(@PathVariable String id, @RequestBody Request request
     ) throws CommandHandlerExecutionError {
     	
-    	dispatch(new CreateUnitMeasureCommand(
-                id,
-                request.groceryId(),
-                request.name(),
-                request.prefix()
-            ));
+    	UnitMeasureResponse response = ask(new FindUnitMeasureQuery(id));
+    	
+    	if(response != null) {
+    		
+        	dispatch(new UpdateUnitMeasureCommand(
+                    id,
+                    request.name(),
+                    request.prefix()
+                ));
+
+    	}else {
+        	dispatch(new CreateUnitMeasureCommand(
+                    id,
+                    request.groceryId(),
+                    request.name(),
+                    request.prefix()
+                ));
+
+    	}
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

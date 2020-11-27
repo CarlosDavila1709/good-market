@@ -13,14 +13,26 @@ public final class OrderResponse implements Response{
 	private String dateCreation;
 	private String codigoStatus;
 	private String descriptionStatus;
+	private String nameCustomer;
 
-	public OrderResponse(String id,String groceryId,String customerId,Double amountTotal,Integer totalItems,String dateCreation) {
+	public OrderResponse(String id,
+			String groceryId,
+			String customerId,
+			Double amountTotal,
+			Integer totalItems,
+			String dateCreation,
+			String codigoStatus,
+			String descriptionStatus,
+			String nameCustomer) {
 		this.id = id;
 		this.groceryId = groceryId;
 		this.customerId = customerId;
 		this.amountTotal = amountTotal;
 		this.totalItems = totalItems;
 		this.dateCreation = dateCreation;
+		this.codigoStatus = codigoStatus;
+		this.descriptionStatus = descriptionStatus;	
+		this.nameCustomer = nameCustomer;
 	}
     public static OrderResponse fromAggregate(Order order) {
         return new OrderResponse(order.id().value(), 
@@ -28,7 +40,10 @@ public final class OrderResponse implements Response{
         		order.customerId().value(),
         		order.amountTotal().value(),
         		order.totalItems().value(),
-        		order.dateCreation().value());
+        		order.dateCreation().value(),
+        		order.status().value(),
+        		order.descriptionStatus(),
+        		order.nameCustomer());
     }
 
     public String id() {
@@ -48,5 +63,14 @@ public final class OrderResponse implements Response{
     }
     public String dateCreation() {
     	return dateCreation;
+    }
+    public String codigoStatus() {
+    	return codigoStatus;
+    }
+    public String descriptionStatus() {
+    	return descriptionStatus;
+    }
+    public String nameCustomer() {
+    	return nameCustomer;
     }
 }

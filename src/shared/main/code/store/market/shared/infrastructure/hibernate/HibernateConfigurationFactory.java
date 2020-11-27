@@ -35,9 +35,20 @@ public final class HibernateConfigurationFactory {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setHibernateProperties(hibernateProperties());
-
+        /****solo de momento estara este codigo*****/
         List<Resource> mappingFiles = searchMappingFiles(contextName);
-
+        if(mappingFiles.size()<1) {
+        	mappingFiles = searchMappingFilesResources(contextName);
+        }
+        if(mappingFiles.size()<1){
+        	try {
+				throw new Exception("No se ha encontrado ningun hbm.xml...");
+			} catch (Exception e) {
+				System.out.println("no se ha mapeado el hbm "+ e.getMessage());
+				e.printStackTrace();
+			}
+        }
+        /****FIN*****/
         sessionFactory.setMappingLocations(mappingFiles.toArray(new Resource[mappingFiles.size()]));
 
         return sessionFactory;
@@ -117,7 +128,35 @@ public final class HibernateConfigurationFactory {
 
         return files;
     }
-
+    /****solo de momento estara este codigo*****/
+    private List<Resource> searchMappingFilesResources(String contextName){
+		///administration/main/resources/administration/categorie/infrastructure/persistence/hibernate/Categorie.hbm.xml
+		List<Resource>  listaBeans = new ArrayList<>();
+		Resource categorie = resourceResolver.getResource("classpath:administration/hibernate/Categorie.hbm.xml");
+		Resource backofficeGrocery = resourceResolver.getResource("classpath:administration/hibernate/BackofficeGrocery.hbm.xml");
+		Resource cartItem = resourceResolver.getResource("classpath:administration/hibernate/CartItem.hbm.xml");
+		Resource customer = resourceResolver.getResource("classpath:administration/hibernate/Customer.hbm.xml");
+		Resource customTypes = resourceResolver.getResource("classpath:administration/hibernate/CustomTypes.hbm.xml");
+		Resource order = resourceResolver.getResource("classpath:administration/hibernate/Order.hbm.xml");
+		Resource orderItem = resourceResolver.getResource("classpath:administration/hibernate/OrderItem.hbm.xml");
+		Resource product = resourceResolver.getResource("classpath:administration/hibernate/Product.hbm.xml");
+		Resource productCatalog = resourceResolver.getResource("classpath:administration/hibernate/ProductCatalog.hbm.xml");
+		Resource shoppingCart = resourceResolver.getResource("classpath:administration/hibernate/ShoppingCart.hbm.xml");
+		Resource unitMeasure = resourceResolver.getResource("classpath:administration/hibernate/UnitMeasure.hbm.xml");
+		listaBeans.add(categorie);
+		listaBeans.add(backofficeGrocery);
+		listaBeans.add(cartItem);
+		listaBeans.add(customer);
+		listaBeans.add(customTypes);
+		listaBeans.add(order);
+		listaBeans.add(orderItem);
+		listaBeans.add(product);
+		listaBeans.add(productCatalog);
+		listaBeans.add(shoppingCart);
+		listaBeans.add(unitMeasure);
+		return listaBeans;
+	}
+    /****FIN*****/
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put(AvailableSettings.HBM2DDL_AUTO, "none");
