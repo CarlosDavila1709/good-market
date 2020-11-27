@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import store.market.administration.categorie.application.CategorieResponse;
 import store.market.administration.categorie.application.create.CreateCategorieCommand;
-import store.market.administration.categorie.application.find.FindCategorieQuery;
-import store.market.administration.categorie.application.update.UpdateCategorieCommand;
 import store.market.shared.domain.DomainError;
 import store.market.shared.domain.bus.command.CommandBus;
 import store.market.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -35,20 +32,13 @@ public class CategoriesPutController extends ApiController{
     @PutMapping(value = "/categories/{id}")
     public ResponseEntity<String> index(@PathVariable String id, @RequestBody Request request
     ) throws CommandHandlerExecutionError {
-    	CategorieResponse response = ask(new FindCategorieQuery(id));
-    	
-    	if(response != null) {
-        	dispatch(new UpdateCategorieCommand(
-                    id,
-                    request.name()
-                ));
-    	}else {
-        	dispatch(new CreateCategorieCommand(
-                    id,
-                    request.groceryId(),
-                    request.name()
-                ));
-    	}
+
+		dispatch(new CreateCategorieCommand(
+	            id,
+	            request.groceryId(),
+	            request.name()
+	        ));
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
