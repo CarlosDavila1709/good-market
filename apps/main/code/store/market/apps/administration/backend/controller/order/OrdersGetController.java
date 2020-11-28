@@ -30,7 +30,7 @@ public final class OrdersGetController extends ApiController {
 		super(queryBus, commandBus);
 	}
 	
-    @SuppressWarnings("serial")
+
 	@GetMapping("/orders")
     public List<HashMap<String, String>> index(
             @RequestParam HashMap<String, Serializable> params

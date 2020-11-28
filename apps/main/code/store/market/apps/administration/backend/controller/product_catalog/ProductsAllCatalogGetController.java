@@ -41,6 +41,7 @@ public final class ProductsAllCatalogGetController extends ApiController{
                 put("categorieName", response.categorieName());
                 put("unitMeasureName", response.unitMeasureName());
                 put("price", response.price().toString());
+                put("unitMeasureId", response.unitMeasureId());
             }}).collect(Collectors.toList());
     }
     
