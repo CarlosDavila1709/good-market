@@ -82,6 +82,8 @@ CREATE TABLE  IF NOT EXISTS orders (
     existing_products VARCHAR(10000000),
     date_creation VARCHAR(255) NOT NULL,
     name_customer VARCHAR(255) NOT NULL,
+    customer_phone VARCHAR(255) NOT NULL,
+    customer_address VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 ) ;
 CREATE TABLE  IF NOT EXISTS order_item (

@@ -25,6 +25,8 @@
         </component>
         <property name="descriptionStatus" column="description_status" type="string" access="field" />
         <property name="nameCustomer" column="name_customer" type="string" access="field" />
+        <property name="customerPhone" column="customer_phone" type="string" access="field" />
+        <property name="customerAddress" column="customer_address" type="string" access="field" />
         <component name="dateCreation" class="store.market.administration.order.domain.OrderDateCreation" access="field">
             <property name="value" column="date_creation" type="string" access="field" />
         </component>

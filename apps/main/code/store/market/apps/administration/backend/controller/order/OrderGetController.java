@@ -28,16 +28,22 @@ public final class OrderGetController extends ApiController{
 	@GetMapping("/orders/{id}")
 	public ResponseEntity<HashMap<String, Serializable>> index(@PathVariable String id)
 			throws QueryHandlerExecutionError {
-		OrderResponse order = ask(new FindOrderQuery(id));
+		OrderResponse response = ask(new FindOrderQuery(id));
 
 		return ResponseEntity.ok().body(new HashMap<String, Serializable>() {
 			{
-				put("id", order.id());
-				put("amountTotal", order.amountTotal());
-				put("customerId", order.customerId());
-				put("dateCreation", order.dateCreation());
-				put("groceryId", order.groceryId());
-				put("totalItems", order.totalItems());
+
+                put("id", response.id());
+                put("customerId", response.customerId());
+                put("groceryId", response.groceryId());
+                put("dateCreation", response.dateCreation());
+                put("amountTotal", response.amountTotal().toString());
+                put("totalItems", response.totalItems().toString());
+                put("codigoStatus", response.codigoStatus().toString());
+                put("descriptionStatus", response.descriptionStatus().toString());
+                put("customerName", response.nameCustomer().toString());
+                put("customerPhone", response.customerPhone());
+                put("customerAddress", response.customerAddress());
 			}
 		});
 	}

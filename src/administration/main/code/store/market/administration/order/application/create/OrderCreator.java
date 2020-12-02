@@ -64,7 +64,9 @@ public final class OrderCreator {
 				new ArrayList<>(),
 				new OrderDateCreation(Utils.dateToString(LocalDateTime.now())),
 				status.description(),
-				customer.customerFirstName() + " " +customer.customerLastName());
+				customer.customerFirstName() + " " +customer.customerLastName(),
+				customer.customerPhone(),
+				customer.customerAddress());
 		
 		shopping.existingProducts().forEach(
 				productId -> order.incrementProduct(new ProductCatalogId(productId))

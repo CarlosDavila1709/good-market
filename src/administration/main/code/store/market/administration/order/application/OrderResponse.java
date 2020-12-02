@@ -14,7 +14,10 @@ public final class OrderResponse implements Response{
 	private String codigoStatus;
 	private String descriptionStatus;
 	private String nameCustomer;
-
+    
+    private String customerPhone;
+    private String customerAddress;
+    
 	public OrderResponse(String id,
 			String groceryId,
 			String customerId,
@@ -23,7 +26,9 @@ public final class OrderResponse implements Response{
 			String dateCreation,
 			String codigoStatus,
 			String descriptionStatus,
-			String nameCustomer) {
+			String nameCustomer,
+			String customerPhone,
+			String customerAddress) {
 		this.id = id;
 		this.groceryId = groceryId;
 		this.customerId = customerId;
@@ -33,6 +38,8 @@ public final class OrderResponse implements Response{
 		this.codigoStatus = codigoStatus;
 		this.descriptionStatus = descriptionStatus;	
 		this.nameCustomer = nameCustomer;
+		this.customerPhone = customerPhone;
+		this.customerAddress = customerAddress;
 	}
     public static OrderResponse fromAggregate(Order order) {
         return new OrderResponse(order.id().value(), 
@@ -43,7 +50,9 @@ public final class OrderResponse implements Response{
         		order.dateCreation().value(),
         		order.status().value(),
         		order.descriptionStatus(),
-        		order.nameCustomer());
+        		order.nameCustomer(),
+        		order.customerPhone(),
+        		order.customerAddress());
     }
 
     public String id() {
@@ -72,5 +81,11 @@ public final class OrderResponse implements Response{
     }
     public String nameCustomer() {
     	return nameCustomer;
+    }
+    public String customerPhone() {
+    	return customerPhone;
+    }
+    public String customerAddress() {
+    	return customerAddress;
     }
 }

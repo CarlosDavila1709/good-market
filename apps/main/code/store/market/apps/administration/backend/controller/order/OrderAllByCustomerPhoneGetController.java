@@ -62,9 +62,11 @@ public final class OrderAllByCustomerPhoneGetController extends ApiController{
                 put("dateCreation", response.dateCreation());
                 put("amountTotal", response.amountTotal().toString());
                 put("totalItems", response.totalItems().toString());
-                put("nameCustomer", response.nameCustomer().toString());
                 put("codigoStatus", response.codigoStatus().toString());
                 put("descriptionStatus", response.descriptionStatus().toString());
+                put("customerName", response.nameCustomer().toString());
+                put("customerPhone", response.customerPhone());
+                put("customerAddress", response.customerAddress());
             }}).collect(Collectors.toList());
 	}
 	@Override
