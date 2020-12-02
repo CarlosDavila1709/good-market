@@ -109,6 +109,8 @@ subprojects {
         enabled = true
     }
 
+        
+
 }
 // Main project (located in apps/)
 buildscript {
@@ -153,5 +155,22 @@ dependencies {
 
 }
 
+task copyFile(type: Copy){
+	FileTree tree = fileTree(dir: 'src/administration/main/code/store/market/administration',include: '**/*.hbm.xml')
+	tree.each {File file ->
+		println "ejecutando copias: " + file.getAbsolutePath()
+		from file
+		into 'src/administration/main/resources/hbm_tmp'
+	}
 
-
+}
+task deleteHbmXml(type: Delete) {
+        delete fileTree('src/administration/main/resources/hbm_tmp') {
+            include '*.hbm.xml'
+        }
+}
+//task makePretty(type: Delete) {
+//  delete 'src/administration/main/resources/hbm_tmp/*.xml'
+//  followSymlinks = true
+//}
+//jar.dependsOn(copyFile)

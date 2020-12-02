@@ -132,6 +132,17 @@ public final class HibernateConfigurationFactory {
     private List<Resource> searchMappingFilesResources(String contextName){
 		///administration/main/resources/administration/categorie/infrastructure/persistence/hibernate/Categorie.hbm.xml
 		List<Resource>  listaBeans = new ArrayList<>();
+    	try {
+			Resource[] resources = resourceResolver.getResources("classpath:hbm_tmp/*.hbm.xml");
+			for(Resource resou: resources) {
+				listaBeans.add(resou);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+/*
 		Resource categorie = resourceResolver.getResource("classpath:administration/hibernate/Categorie.hbm.xml");
 		Resource backofficeGrocery = resourceResolver.getResource("classpath:administration/hibernate/BackofficeGrocery.hbm.xml");
 		Resource cartItem = resourceResolver.getResource("classpath:administration/hibernate/CartItem.hbm.xml");
@@ -157,7 +168,7 @@ public final class HibernateConfigurationFactory {
 		listaBeans.add(productCatalog);
 		listaBeans.add(shoppingCart);
 		listaBeans.add(unitMeasure);
-		listaBeans.add(backoffice_grocery);
+		listaBeans.add(backoffice_grocery);*/
 		return listaBeans;
 	}
     /****FIN*****/
