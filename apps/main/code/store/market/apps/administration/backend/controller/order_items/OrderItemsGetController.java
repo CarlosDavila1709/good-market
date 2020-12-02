@@ -39,6 +39,8 @@ public final class OrderItemsGetController extends ApiController{
             put("productName", response.productName());
             put("productPrice", response.productPrice().toString());
             put("quantity", response.quantity().toString());
+            put("categorieName", response.categorieName());
+            put("unitMeasureName", response.unitMeasureName());
         }}).collect(Collectors.toList());
 	}
     @Override

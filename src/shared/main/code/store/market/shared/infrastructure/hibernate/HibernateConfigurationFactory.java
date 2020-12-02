@@ -141,34 +141,6 @@ public final class HibernateConfigurationFactory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-/*
-		Resource categorie = resourceResolver.getResource("classpath:administration/hibernate/Categorie.hbm.xml");
-		Resource backofficeGrocery = resourceResolver.getResource("classpath:administration/hibernate/BackofficeGrocery.hbm.xml");
-		Resource cartItem = resourceResolver.getResource("classpath:administration/hibernate/CartItem.hbm.xml");
-		Resource customer = resourceResolver.getResource("classpath:administration/hibernate/Customer.hbm.xml");
-		Resource customTypes = resourceResolver.getResource("classpath:administration/hibernate/CustomTypes.hbm.xml");
-		Resource order = resourceResolver.getResource("classpath:administration/hibernate/Order.hbm.xml");
-		Resource orderItem = resourceResolver.getResource("classpath:administration/hibernate/OrderItem.hbm.xml");
-		Resource product = resourceResolver.getResource("classpath:administration/hibernate/Product.hbm.xml");
-		Resource productCatalog = resourceResolver.getResource("classpath:administration/hibernate/ProductCatalog.hbm.xml");
-		Resource shoppingCart = resourceResolver.getResource("classpath:administration/hibernate/ShoppingCart.hbm.xml");
-		Resource unitMeasure = resourceResolver.getResource("classpath:administration/hibernate/UnitMeasure.hbm.xml");
-		
-		Resource backoffice_grocery = resourceResolver.getResource("classpath:backoffice/hibernate/Grocery.hbm.xml");
-
-		listaBeans.add(categorie);
-		listaBeans.add(backofficeGrocery);
-		listaBeans.add(cartItem);
-		listaBeans.add(customer);
-		listaBeans.add(customTypes);
-		listaBeans.add(order);
-		listaBeans.add(orderItem);
-		listaBeans.add(product);
-		listaBeans.add(productCatalog);
-		listaBeans.add(shoppingCart);
-		listaBeans.add(unitMeasure);
-		listaBeans.add(backoffice_grocery);*/
 		return listaBeans;
 	}
     /****FIN*****/

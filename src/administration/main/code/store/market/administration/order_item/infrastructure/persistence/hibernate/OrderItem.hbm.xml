@@ -26,5 +26,7 @@
         <component name="quantity" class="store.market.administration.order_item.domain.ItemQuantity" access="field">
             <property name="value" column="quantity" type="integer" access="field" />
         </component>
+        <property name="categorieName" column="categorie_name" type="string" access="field" />
+        <property name="unitMeasureName" column="unitMeasure_name" type="string" access="field" />
     </class>
 </hibernate-mapping>

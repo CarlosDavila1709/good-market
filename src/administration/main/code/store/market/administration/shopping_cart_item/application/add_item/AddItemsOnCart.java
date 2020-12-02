@@ -40,7 +40,8 @@ public final class AddItemsOnCart {
 								new CartItemProductPrice(product.price()), 
 								new CartItemProductName(product.name()),
 								groceryId,
-								new CartItemUnitMeasureName(product.unitMeasureName()))
+								new CartItemUnitMeasureName(product.unitMeasureName()),
+								new CartItemCategorieName(product.categorieName()))
 						);
     	
 		cartItem.increment(new CartItemQuantity(quantity.value()));

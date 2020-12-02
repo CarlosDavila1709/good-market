@@ -59,6 +59,7 @@ CREATE TABLE  IF NOT EXISTS cart_items (
     amount_total DECIMAL(13, 2) NOT NULL,
     quantity INT NOT NULL,
     unit_measure_name VARCHAR(255),
+    categorie_name VARCHAR(255),
     PRIMARY KEY (id)
 ) ;
 CREATE TABLE  IF NOT EXISTS customers (
@@ -91,5 +92,7 @@ CREATE TABLE  IF NOT EXISTS order_item (
     product_price DECIMAL(13, 2) NOT NULL,
     amount_total DECIMAL(13, 2) NOT NULL,
     quantity INT NOT NULL,
+    categorie_name VARCHAR(255) NOT NULL,
+    unitMeasure_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 ) ;

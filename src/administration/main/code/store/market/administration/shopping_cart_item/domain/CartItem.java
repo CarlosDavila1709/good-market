@@ -25,6 +25,8 @@ public final class CartItem extends AggregateRoot {
 	
 	private final CartItemUnitMeasureName unitMeasureName;
 	
+	private final CartItemCategorieName categorieName;
+	
 	private CartItemAmountTotal amountTotal;
 	
 	private CartItemQuantity quantity;
@@ -40,7 +42,8 @@ public final class CartItem extends AggregateRoot {
 			CartItemProductName productName,
 			CartItemQuantity quantity,
 			BackofficeGroceryId groceryId,
-			CartItemUnitMeasureName unitMeasureName) {
+			CartItemUnitMeasureName unitMeasureName,
+			CartItemCategorieName categorieName) {
 
 		this.id = id;
 		this.shoppingCartId = shoppingCartId;
@@ -52,6 +55,7 @@ public final class CartItem extends AggregateRoot {
 		this.quantity = quantity;
 		this.groceryId = groceryId;
 		this.unitMeasureName = unitMeasureName;
+		this.categorieName = categorieName;
 	}
 	
 	
@@ -66,6 +70,7 @@ public final class CartItem extends AggregateRoot {
 		this.quantity = null;
 		this.groceryId = null;
 		this.unitMeasureName = null;
+		this.categorieName = null;
 	}
 	
 	public static CartItem initialize(
@@ -76,9 +81,10 @@ public final class CartItem extends AggregateRoot {
 			CartItemProductPrice productPrice,
 			CartItemProductName productName,
 			BackofficeGroceryId groceryId,
-			CartItemUnitMeasureName unitMeasureName) {
+			CartItemUnitMeasureName unitMeasureName,
+			CartItemCategorieName categorieName) {
 		
-		CartItem cartItem = new  CartItem(id,shoppingCartId,sessionId,productId,productPrice,productName,CartItemQuantity.initialize(),groceryId,unitMeasureName);
+		CartItem cartItem = new  CartItem(id,shoppingCartId,sessionId,productId,productPrice,productName,CartItemQuantity.initialize(),groceryId,unitMeasureName,categorieName);
 
 		return cartItem;
 		
@@ -148,6 +154,9 @@ public final class CartItem extends AggregateRoot {
 	public CartItemUnitMeasureName unitMeasureName() {
 		return unitMeasureName;
 	}
+	public CartItemCategorieName categorieName() {
+		return categorieName;
+	}
 	public void updateQuantity(ShoppingCartId cartId, CartItemProductId productId, CartItemQuantity quantity) {
 		this.quantity = quantity;
 		this.record(new UpdateQuantityItemToShoppingCartAggregateDomainEvent(id.value(), cartId.value(),  productId.value(),  quantity.value()));
@@ -174,7 +183,7 @@ public final class CartItem extends AggregateRoot {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,shoppingCartId,sessionId,productId, productPrice,productName,amountTotal,quantity,groceryId,unitMeasureName);
+        return Objects.hash(id,shoppingCartId,sessionId,productId, productPrice,productName,amountTotal,quantity,groceryId,unitMeasureName,categorieName);
     }
 
 }

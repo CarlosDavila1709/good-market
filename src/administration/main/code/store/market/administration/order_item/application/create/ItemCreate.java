@@ -47,7 +47,9 @@ public final class ItemCreate {
 				new ItemProductName(cartItemResponse.productName()), 
 				new ItemProductPrice(cartItemResponse.productPrice()), 
 				new ItemAmountTotal(cartItemResponse.amountTotal()), 
-				new ItemQuantity(cartItemResponse.quantity()));
+				new ItemQuantity(cartItemResponse.quantity()),
+				cartItemResponse.categorieName(),
+				cartItemResponse.unitMeasureName());
 		repository.save(item);
 	}
 }

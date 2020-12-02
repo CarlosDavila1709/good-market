@@ -12,9 +12,11 @@ public final class OrderItemResponse implements Response {
 	private final Double productPrice;
 	private final Double amountTotal;
 	private final Integer quantity;
+	private final String categorieName;
+    private final String unitMeasureName;
 
 	public OrderItemResponse(String id, String orderId, String productId, String productName, Double productPrice,
-			Double amountTotal, Integer quantity) {
+			Double amountTotal, Integer quantity,String categorieName,String unitMeasureName) {
 		this.id = id;
 		this.orderId = orderId;
 		this.productId = productId;
@@ -22,6 +24,8 @@ public final class OrderItemResponse implements Response {
 		this.productPrice = productPrice;
 		this.amountTotal = amountTotal;
 		this.quantity = quantity;
+		this.categorieName = categorieName;
+		this.unitMeasureName = unitMeasureName;
 	}
 
 	public static OrderItemResponse fromAggregate(Item item) {
@@ -31,7 +35,9 @@ public final class OrderItemResponse implements Response {
 				item.productName().value(), 
 				item.productPrice().value(), 
 				item.amountTotal().value(),
-				item.quantity().value());
+				item.quantity().value(),
+				item.categorieName(),
+				item.unitMeasureName());
 	}
 
 	public String id() {
@@ -60,5 +66,11 @@ public final class OrderItemResponse implements Response {
 
 	public Integer quantity() {
 		return quantity;
+	}
+	public String categorieName() {
+		return categorieName;
+	}
+	public String unitMeasureName() {
+		return unitMeasureName;
 	}
 }

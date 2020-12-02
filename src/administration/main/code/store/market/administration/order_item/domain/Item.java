@@ -15,8 +15,11 @@ public final class Item extends AggregateRoot{
 	private ItemProductPrice productPrice;
 	private ItemAmountTotal amountTotal;
 	private ItemQuantity quantity;
-	
-	public Item(ItemId id,OrderId orderId,ProductCatalogId productId,ItemProductName productName,ItemProductPrice productPrice,ItemAmountTotal amountTotal,ItemQuantity quantity) {
+
+    private final String categorieName;
+    private final String unitMeasureName;
+    
+	public Item(ItemId id,OrderId orderId,ProductCatalogId productId,ItemProductName productName,ItemProductPrice productPrice,ItemAmountTotal amountTotal,ItemQuantity quantity,String categorieName,String unitMeasureName) {
 		
 		this.id = id;
 		this.orderId = orderId;
@@ -25,6 +28,8 @@ public final class Item extends AggregateRoot{
 		this.productPrice = productPrice;
 		this.amountTotal = amountTotal;
 		this.quantity = quantity;
+		this.categorieName = categorieName;
+		this.unitMeasureName = unitMeasureName;
 	}
 	public Item() {
 		this.id = null;
@@ -34,9 +39,11 @@ public final class Item extends AggregateRoot{
 		this.productPrice = null;
 		this.amountTotal = null;
 		this.quantity = null;
+		this.categorieName = null;
+		this.unitMeasureName = null;
 	}
-	public static Item create(ItemId id,OrderId orderId,ProductCatalogId productId,ItemProductName productName,ItemProductPrice productPrice,ItemAmountTotal amountTotal,ItemQuantity quantity) {
-		Item item = new Item( id, orderId, productId, productName, productPrice, amountTotal, quantity);
+	public static Item create(ItemId id,OrderId orderId,ProductCatalogId productId,ItemProductName productName,ItemProductPrice productPrice,ItemAmountTotal amountTotal,ItemQuantity quantity,String categorieName,String unitMeasureName) {
+		Item item = new Item( id, orderId, productId, productName, productPrice, amountTotal, quantity,categorieName,unitMeasureName);
 		
 		return item;		
 	}
@@ -61,6 +68,12 @@ public final class Item extends AggregateRoot{
 	public ItemQuantity quantity() {
 		return quantity;
 	}
+	public String categorieName() {
+		return categorieName;
+	}
+	public String unitMeasureName() {
+		return unitMeasureName;
+	}
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -76,11 +89,13 @@ public final class Item extends AggregateRoot{
         		productName.equals(that.productName) &&
         		productPrice.equals(that.productPrice) &&
         		amountTotal.equals(that.amountTotal) &&
-        		quantity.equals(that.quantity);
+        		quantity.equals(that.quantity) &&
+        		categorieName.equals(that.categorieName) &&
+        		unitMeasureName.equals(that.unitMeasureName) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( id, orderId, productId, productName, productPrice, amountTotal, quantity);
+        return Objects.hash( id, orderId, productId, productName, productPrice, amountTotal, quantity,categorieName,unitMeasureName);
     }
 }
