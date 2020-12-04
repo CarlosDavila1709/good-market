@@ -155,17 +155,28 @@ dependencies {
 
 }
 
-task copyFile(type: Copy){
+task copyFile1(type: Copy){
 	FileTree tree = fileTree(dir: 'src/administration/main/code/store/market/administration',include: '**/*.hbm.xml')
 	tree.each {File file ->
 		println "ejecutando copias: " + file.getAbsolutePath()
 		from file
-		into 'src/administration/main/resources/hbm_tmp'
+		into 'src/administration/main/resources/hbm_tmp/administration'
 	}
 
 }
+task copyFile2(type: Copy){
+	FileTree tree2 = fileTree(dir: 'src/backoffice/main/code/store/market/backoffice',include: '**/*.hbm.xml')
+	tree2.each {File file ->
+		println "ejecutando copias: " + file.getAbsolutePath()
+		from file
+		into 'src/backoffice/main/resources/hbm_tmp/backoffice'
+	}
+}
 task deleteHbmXml(type: Delete) {
-        delete fileTree('src/administration/main/resources/hbm_tmp') {
+        delete fileTree('src/administration/main/resources/hbm_tmp/administration') {
+            include '*.hbm.xml'
+        }
+        delete fileTree('src/backoffice/main/resources/hbm_tmp/backoffice') {
             include '*.hbm.xml'
         }
 }

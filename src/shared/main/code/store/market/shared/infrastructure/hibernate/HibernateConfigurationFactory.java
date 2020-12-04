@@ -37,6 +37,7 @@ public final class HibernateConfigurationFactory {
         sessionFactory.setHibernateProperties(hibernateProperties());
         /****solo de momento estara este codigo*****/
         List<Resource> mappingFiles = searchMappingFiles(contextName);
+        mappingFiles.clear();
         if(mappingFiles.size()<1) {
         	mappingFiles = searchMappingFilesResources(contextName);
         }
@@ -133,7 +134,7 @@ public final class HibernateConfigurationFactory {
 		///administration/main/resources/administration/categorie/infrastructure/persistence/hibernate/Categorie.hbm.xml
 		List<Resource>  listaBeans = new ArrayList<>();
     	try {
-			Resource[] resources = resourceResolver.getResources("classpath:hbm_tmp/*.hbm.xml");
+			Resource[] resources = resourceResolver.getResources("classpath:hbm_tmp/"+contextName+"/*.hbm.xml");
 			for(Resource resou: resources) {
 				listaBeans.add(resou);
 			}
