@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import store.market.administration.order_item.domain.Item;
 import store.market.administration.order_item.domain.ItemId;
 import store.market.administration.order_item.domain.ItemRepository;
+
 import store.market.shared.domain.Service;
 import store.market.shared.domain.criteria.Criteria;
 import store.market.shared.infrastructure.hibernate.HibernateRepository;
@@ -41,4 +42,9 @@ public class PgSqlItemRepository extends HibernateRepository<Item> implements It
 		return byCriteria(criteria);
 	}
 
+    @Override
+    public void delete(Item item) {
+
+    	remover(item);
+    }
 }

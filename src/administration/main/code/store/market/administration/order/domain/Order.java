@@ -1,5 +1,6 @@
 package store.market.administration.order.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,8 +9,12 @@ import store.market.administration.customer.domain.CustomerId;
 import store.market.administration.grocery.domain.BackofficeGroceryId;
 import store.market.administration.product_catalog.domain.ProductCatalogId;
 import store.market.administration.shopping_cart.application.ShoppingCartResponse;
+import store.market.administration.shopping_cart.domain.ShoppingCartAmountTotal;
+import store.market.administration.shopping_cart.domain.ShoppingCartCounterItems;
 import store.market.shared.domain.AggregateRoot;
+import store.market.shared.domain.orders.DeleteItemToOrderAggregateDomainEvent;
 import store.market.shared.domain.orders.OrderCreatedDomainEvent;
+import store.market.shared.domain.orders.OrderItemsAggregatedDomainEvent;
 
 public final class Order extends AggregateRoot{
 
@@ -31,7 +36,8 @@ public final class Order extends AggregateRoot{
     		CustomerId customerId,
     		OrderAmountTotal amountTotal,
     		OrderCounterItems totalItems,
-    		OrderStatus status,List<ProductCatalogId> existingProducts,
+    		OrderStatus status,
+    		List<ProductCatalogId> existingProducts,
     		OrderDateCreation dateCreation,
     		String descriptionStatus,
     		String nameCustomer,
@@ -90,9 +96,38 @@ public final class Order extends AggregateRoot{
     	order.record(new OrderCreatedDomainEvent(id.value(), shopping.sessionId(),shopping.id()));
         return order;
     }
+    public void removeProduct(ProductCatalogId productId) {
+
+    	List<ProductCatalogId> operatedList = new ArrayList<>();
+    	existingProducts.stream()
+    	  .forEach(item -> {
+    		  if(item.equals(productId))
+    			  operatedList.add(item);
+    	});
+    	existingProducts.removeAll(operatedList);
+    	totalItems = totalItems.decrement(operatedList.size());
+
+    }
+    public void addProduct(ProductCatalogId productId,Integer quantity) {
+    	incrementProduct(productId);
+    	record(new OrderItemsAggregatedDomainEvent(id.value(),productId.value(),quantity));
+    }
     public void incrementProduct(ProductCatalogId id) {
        
     	existingProducts.add(id);
+    	totalItems = totalItems.increment(1);
+    }
+	public void inizializeTotalItems() {		
+		this.totalItems = totalItems.initialize();
+	}
+	public void increaseAmount(OrderAmountTotal amountTotal) {		
+		this.amountTotal = this.amountTotal.increment(amountTotal.value());
+	}
+    public void subtractAmountTotal(Double priceProduct) {
+    	this.amountTotal = this.amountTotal.subtract(priceProduct);
+    }
+    public void prepareElimination(String orderId,String itemId) {
+    	record(new DeleteItemToOrderAggregateDomainEvent(orderId,itemId));
     }
     public OrderId id() {
     	return id;

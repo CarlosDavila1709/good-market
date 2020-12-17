@@ -12,4 +12,6 @@ public interface ItemRepository {
     Optional<Item> search(ItemId id);
 
     List<Item> matching(Criteria criteria);
+    
+    void delete(Item item);
 }

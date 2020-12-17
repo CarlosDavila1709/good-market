@@ -68,6 +68,8 @@ public final class OrderCreator {
 				customer.customerPhone(),
 				customer.customerAddress());
 		
+		order.inizializeTotalItems();
+		
 		shopping.existingProducts().forEach(
 				productId -> order.incrementProduct(new ProductCatalogId(productId))
 				);

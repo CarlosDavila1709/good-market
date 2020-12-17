@@ -37,7 +37,6 @@ public final class HibernateConfigurationFactory {
         sessionFactory.setHibernateProperties(hibernateProperties());
         /****solo de momento estara este codigo*****/
         List<Resource> mappingFiles = searchMappingFiles(contextName);
-        mappingFiles.clear();
         if(mappingFiles.size()<1) {
         	mappingFiles = searchMappingFilesResources(contextName);
         }

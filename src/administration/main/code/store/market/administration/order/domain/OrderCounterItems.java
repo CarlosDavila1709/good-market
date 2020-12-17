@@ -10,4 +10,14 @@ public final class OrderCounterItems extends IntValueObject{
 	public OrderCounterItems() {
 		super(null);
 	}
+	
+    public static OrderCounterItems initialize() {
+        return new OrderCounterItems(0);
+    }
+    public OrderCounterItems increment(int value) {
+        return new OrderCounterItems(value() + value);
+    }
+    public OrderCounterItems decrement(int value) {
+        return new OrderCounterItems(value() - value);
+    }
 }
