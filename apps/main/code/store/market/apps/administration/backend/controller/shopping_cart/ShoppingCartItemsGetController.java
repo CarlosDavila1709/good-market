@@ -59,6 +59,7 @@ public final class ShoppingCartItemsGetController extends ApiController{
             put("price", response.productPrice().toString());
             put("amount_total", response.amountTotal().toString());
             put("unit_measure_name", response.unitMeasureName());
+            put("categorie_name", response.categorieName());
         }}).collect(Collectors.toList());
     }
     
