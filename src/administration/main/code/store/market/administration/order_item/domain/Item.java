@@ -47,6 +47,12 @@ public final class Item extends AggregateRoot{
 		
 		return item;		
 	}
+	public void increaseAmount(ItemAmountTotal amountTotal) {		
+		this.amountTotal = this.amountTotal.increment(amountTotal.value());
+	}
+	public void increaseQuantity(ItemQuantity itemQuantity) {		
+		this.quantity = this.quantity.increment(itemQuantity.value());
+	}
 	public ItemId id() {
 		return id;
 	}

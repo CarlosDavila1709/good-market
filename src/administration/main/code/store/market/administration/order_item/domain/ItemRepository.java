@@ -13,5 +13,7 @@ public interface ItemRepository {
 
     List<Item> matching(Criteria criteria);
     
+    List<Item> searchByField(String field,String value);
+    
     void delete(Item item);
 }

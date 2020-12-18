@@ -41,7 +41,12 @@ public class PgSqlItemRepository extends HibernateRepository<Item> implements It
 		
 		return byCriteria(criteria);
 	}
-
+	@Override
+	public List<Item> searchByField(String field,String value) {
+		
+		return byField(field,value);
+	}
+	
     @Override
     public void delete(Item item) {
 

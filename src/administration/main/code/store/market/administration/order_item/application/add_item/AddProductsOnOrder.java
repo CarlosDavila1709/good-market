@@ -1,5 +1,7 @@
 package store.market.administration.order_item.application.add_item;
 
+import java.util.List;
+
 import store.market.administration.order.domain.OrderId;
 import store.market.administration.order_item.domain.Item;
 import store.market.administration.order_item.domain.ItemAmountTotal;
@@ -32,18 +34,32 @@ public final class AddProductsOnOrder {
 	public void add(OrderId orderId, ItemQuantity quantity, ProductCatalogId productCatalogId) {
     	
 		ProductCatalogResponse response = queryBus.ask(new FindProductCatalogQuery(productCatalogId.value()));
-    	
-		Item item = Item.create(
-				new ItemId(uuidGenerator.generate()), 
-				orderId, 
-				productCatalogId, 
-				new ItemProductName(response.name()), 
-				new ItemProductPrice(response.price()), 
-				new ItemAmountTotal(response.price()*quantity.value()), 
-				quantity,
-				response.categorieName(),
-				response.unitMeasureName());
+
+		List<Item> items =  repository.searchByField("orderId", orderId.value());
 		
-		repository.save(item);
+		items.forEach(item-> {
+			
+			if(item.productId().value().equals(productCatalogId.value())) {
+				
+				item.increaseAmount(new ItemAmountTotal(response.price()*quantity.value()));
+				item.increaseQuantity(quantity);
+				repository.save(item);
+				return ;
+			}else {
+				Item newItem = Item.create(
+						new ItemId(uuidGenerator.generate()), 
+						orderId, 
+						productCatalogId, 
+						new ItemProductName(response.name()), 
+						new ItemProductPrice(response.price()), 
+						new ItemAmountTotal(response.price()*quantity.value()), 
+						quantity,
+						response.categorieName(),
+						response.unitMeasureName());
+				repository.save(newItem);
+				return ;
+			}
+			
+		});
 	}
 }

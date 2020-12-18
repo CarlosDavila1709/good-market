@@ -3,8 +3,13 @@ package store.market.shared.infrastructure.hibernate;
 import org.hibernate.SessionFactory;
 import store.market.shared.domain.Identifier;
 import store.market.shared.domain.criteria.Criteria;
+import store.market.shared.domain.criteria.Filter;
+import store.market.shared.domain.criteria.Filters;
+import store.market.shared.domain.criteria.Order;
 
 import javax.persistence.criteria.CriteriaQuery;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +55,16 @@ public abstract class HibernateRepository<T> {
         }
 
     }
-
+    protected List<T> byField(String field, String value) {
+    	Filter filter = Filter.create(field, "=", value);
+		List<Filter> filtersList = new ArrayList<Filter>();
+		filtersList.add(filter);
+		Filters filters = new Filters(filtersList);
+		
+		Criteria criteria = new Criteria(filters, Order.none(),Optional.empty(), Optional.empty());
+		
+		return byCriteria(criteria);
+    }
     protected List<T> all() {
         CriteriaQuery<T> criteria = sessionFactory.getCriteriaBuilder().createQuery(aggregateClass);
 
