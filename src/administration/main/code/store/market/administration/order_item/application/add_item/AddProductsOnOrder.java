@@ -37,29 +37,24 @@ public final class AddProductsOnOrder {
 
 		List<Item> items =  repository.searchByField("orderId", orderId.value());
 		
-		items.forEach(item-> {
-			
-			if(item.productId().value().equals(productCatalogId.value())) {
-				
-				item.increaseAmount(new ItemAmountTotal(response.price()*quantity.value()));
-				item.increaseQuantity(quantity);
-				repository.save(item);
-				return ;
-			}else {
-				Item newItem = Item.create(
-						new ItemId(uuidGenerator.generate()), 
-						orderId, 
-						productCatalogId, 
-						new ItemProductName(response.name()), 
-						new ItemProductPrice(response.price()), 
-						new ItemAmountTotal(response.price()*quantity.value()), 
-						quantity,
-						response.categorieName(),
-						response.unitMeasureName());
-				repository.save(newItem);
-				return ;
-			}
-			
-		});
+		Item searchItem = items.stream().filter(player -> player.productId().value().contains(productCatalogId.value())).findFirst().orElse(null);
+
+		if(searchItem != null) {
+			searchItem.increaseAmount(new ItemAmountTotal(response.price()*quantity.value()));
+			searchItem.increaseQuantity(quantity);
+			repository.save(searchItem);
+		}else {
+			Item newItem = Item.create(
+					new ItemId(uuidGenerator.generate()), 
+					orderId, 
+					productCatalogId, 
+					new ItemProductName(response.name()), 
+					new ItemProductPrice(response.price()), 
+					new ItemAmountTotal(response.price()*quantity.value()), 
+					quantity,
+					response.categorieName(),
+					response.unitMeasureName());
+			repository.save(newItem);
+		}
 	}
 }
