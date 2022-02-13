@@ -45,6 +45,12 @@ allprojects {
         testImplementation 'org.mockito:mockito-core:2.+'
         testImplementation 'com.github.javafaker:javafaker:1.0.1'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+        
+        implementation 'com.auth0:java-jwt:3.12.1'
+        implementation 'com.google.auth:google-auth-library-oauth2-http:0.23.0'
+		implementation 'com.google.api-client:google-api-client:1.19.1'
+    	
+    	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     }
 
     dependencyManagement {

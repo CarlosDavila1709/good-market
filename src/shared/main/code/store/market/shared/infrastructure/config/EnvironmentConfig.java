@@ -16,7 +16,7 @@ public class EnvironmentConfig {
 
     @Bean
     public Dotenv dotenv() {
-        Resource resource = resourceLoader.getResource("classpath:/.env.local");
+        Resource resource = resourceLoader.getResource("classpath:/.env.localxxx");
 
         return Dotenv
             .configure()

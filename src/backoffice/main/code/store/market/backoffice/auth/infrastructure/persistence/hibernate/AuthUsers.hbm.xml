@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="store.market.backoffice.auth.domain.AuthUser" table="auth_users">
+        <composite-id name="id" class="store.market.backoffice.auth.domain.AuthUserId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+        <component name="email" class="store.market.backoffice.auth.domain.AuthUserEmail" access="field">
+            <property name="value" column="email" type="string" access="field" />
+        </component>
+        <component name="password" class="store.market.backoffice.auth.domain.AuthUserPassword" access="field">
+            <property name="value" column="password" type="string" access="field" />
+        </component>
+        <component name="oauthCompany" class="store.market.backoffice.auth.domain.OAuthCompany" access="field">
+            <property name="value" column="oauth_company" type="string" access="field" />
+        </component>
+        <component name="groceryId" class="store.market.backoffice.grocery.domain.GroceryId" access="field">
+            <property name="value" column="grocery_id" type="string" access="field" />
+        </component>
+        <property name="oauthExternal" column="oauth_external" type="boolean" access="field" />
+    </class>
+</hibernate-mapping>

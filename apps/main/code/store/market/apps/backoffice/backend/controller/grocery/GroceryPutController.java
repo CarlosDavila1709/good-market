@@ -30,7 +30,7 @@ public final class GroceryPutController extends ApiController {
 	        @PathVariable String id,
 	        @RequestBody Request request) throws CommandHandlerExecutionError  {
 		
-    	dispatch(new CreateGroceryCommand(id, request.nameCommercial, request.address, request.active));
+    	dispatch(new CreateGroceryCommand(id, request.nameCommercial(), request.address(), request.active()));
     	
     	return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -40,30 +40,31 @@ public final class GroceryPutController extends ApiController {
 		return null;
 	}
 	
-	final class Request{
-		
-		private String nameCommercial;
-		private String address;
-		private String active;
-		
-		public String getNameCommercial() {
-			return nameCommercial;
-		}
-		public void setNameCommercial(String nameCommercial) {
-			this.nameCommercial = nameCommercial;
-		}
-		public String getAddress() {
-			return address;
-		}
-		public void setAddress(String address) {
-			this.address = address;
-		}
-		public String getActive() {
-			return active;
-		}
-		public void setActive(String active) {
-			this.active = active;
-		}
-		
+
+}
+final class Request{
+	
+	private String nameCommercial;
+	private String address;
+	private String active;
+	
+	public String nameCommercial() {
+		return nameCommercial;
 	}
+	public void setNameCommercial(String nameCommercial) {
+		this.nameCommercial = nameCommercial;
+	}
+	public String address() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String active() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
+	}
+	
 }
